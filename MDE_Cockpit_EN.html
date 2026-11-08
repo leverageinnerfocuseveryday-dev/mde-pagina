@@ -437,7 +437,19 @@ main section[id] { scroll-margin-top: 84px !important; }
           <p style="margin: 18px 0 0; max-width: 32em; font-size: 17px; color: #C5D3E8">Like a pilot before takeoff, check your list. Switch on the panel what you already have in your job.</p>
           <p style="margin: 24px 0 0; max-width: 28em; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(21px, 2.2vw, 26px); line-height: 1.25; color: #FFFFFF">Your work should not depend on guesswork. Learn to organize it, measure it, and improve it.</p>
           <ul aria-label="Three outcomes" style="list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px"><li style="display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #4A5C76; border-radius: 999px; background: #263446; font-size: 16px; font-weight: 600"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #58E1FF">1</span>Organize the work</li><li style="display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #4A5C76; border-radius: 999px; background: #263446; font-size: 16px; font-weight: 600"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #58E1FF">2</span>Measure its performance</li><li style="display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #4A5C76; border-radius: 999px; background: #263446; font-size: 16px; font-weight: 600"><span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #58E1FF">3</span>Improve its results</li></ul>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px"><button type="button" onClick="{{navSim}}" style="min-height: 54px; padding: 14px 24px; font: inherit; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">Try the free simulator</button><button type="button" onClick="{{toCourse}}" style="min-height: 54px; padding: 12px 22px; font: inherit; font-weight: 600; color: #FFFFFF; background: transparent; border: 2px solid #58E1FF; border-radius: 10px; cursor: pointer">See how the course works</button></div>
+          <div id="guia" style="margin-top: 26px; padding: clamp(16px, 2.4vw, 22px); border: 1px solid #4A5C76; border-radius: 16px; background: #151C27; scroll-margin-top: 120px">
+            <div aria-hidden="true" style="display: flex; gap: 4px"><sc-for list="{{guide.bars}}" as="gb" hint-placeholder-count="8"><span style="flex: 1 1 0; height: 6px; border-radius: 4px; background: {{gb.c}}"></span></sc-for></div>
+            <p style="margin: 12px 0 4px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #58E1FF">{{guide.label}}</p>
+            <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; color: #FFFFFF">{{guide.title}}</h2>
+            <p style="margin: 12px 0 0; font-size: 17px; color: #EAF2FF"><b style="color: #58E1FF">{{guide.whatH}}</b> {{guide.what}}</p>
+            <p style="margin: 6px 0 0; font-size: 17px; color: #C5D3E8"><b style="color: #FFC86B">{{guide.whyH}}</b> {{guide.why}}</p>
+            <sc-if value="{{guide.hasOpts}}" hint-placeholder-val="{{ true }}"><div style="display: grid; gap: 8px; margin-top: 14px"><sc-for list="{{guide.opts}}" as="go" hint-placeholder-count="6"><button type="button" data-g="opt" onClick="{{go.pick}}" aria-pressed="{{go.pressed}}" style="min-height: 50px; padding: 10px 14px; text-align: left; font: inherit; font-size: 17px; font-weight: 600; color: {{go.fg}}; background: {{go.bg}}; border: 2px solid {{go.bd}}; border-radius: 10px; cursor: pointer">{{go.label}}</button></sc-for></div></sc-if>
+            <sc-if value="{{guide.isPanel}}" hint-placeholder-val="{{ false }}"><div style="display: grid; gap: 8px; margin-top: 14px"><sc-for list="{{checks}}" as="c" hint-placeholder-count="3"><button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; padding: 8px 10px; text-align: left; font: inherit; color: #EAF2FF; background: #1D2735; border: 1px solid {{c.border}}; border-radius: 10px; cursor: pointer"><span style="flex: 1 1 auto; min-width: 0; font-size: 16px; font-weight: 600; line-height: 1.3">{{c.label}}</span><span aria-hidden="true" style="flex: 0 0 auto; display: block; width: 48px; height: 28px; box-sizing: border-box; padding: 2px; border-radius: 999px; background: {{c.track}}"><span style="display: block; width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; margin-left: {{c.knob}}"></span></span></button></sc-for></div></sc-if>
+            <sc-if value="{{guide.hasLines}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 14px; padding: 14px; border-radius: 12px; background: #1D2735; border: 1px solid #3A4A60"><sc-for list="{{guide.lines}}" as="gl" hint-placeholder-count="4"><sc-if value="{{gl.isQuote}}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 8px; padding-left: 12px; border-left: 3px solid #58E1FF; font-size: 17px; font-style: italic; color: #FFFFFF">{{gl.text}}</p></sc-if><sc-if value="{{gl.isHead}}" hint-placeholder-val="{{ false }}"><p style="margin: 8px 0 6px; font-size: 18px; font-weight: 700; color: #FFFFFF">{{gl.text}}</p></sc-if><sc-if value="{{gl.isText}}" hint-placeholder-val="{{ true }}"><p style="margin: 0 0 8px; font-size: 16px; color: #C5D3E8">{{gl.text}}</p></sc-if><sc-if value="{{gl.isItem}}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 6px; padding-left: 22px; text-indent: -22px; font-size: 16px; color: {{gl.color}}; font-weight: {{gl.weight}}">{{gl.text}}</p></sc-if></sc-for></div></sc-if>
+            <sc-if value="{{guide.isDone}}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: #123F2C; border: 1px solid #4ADE9A; font-size: 16px; color: #EAF2FF"><b style="color: #4ADE9A">✓ {{guide.gotH}}</b> {{guide.got}}</p></sc-if>
+            <sc-if value="{{guide.hasBtn}}" hint-placeholder-val="{{ true }}"><button type="button" data-g="main" onClick="{{guide.btn}}" style="display: block; width: 100%; min-height: 54px; margin-top: 16px; padding: 14px 20px; font: inherit; font-size: 18px; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">{{guide.btnLabel}}</button></sc-if>
+            <sc-if value="{{guide.hasBack}}" hint-placeholder-val="{{ false }}"><button type="button" data-g="back" onClick="{{guide.backFn}}" style="min-height: 44px; margin-top: 8px; padding: 6px 2px; font: inherit; font-size: 15px; font-weight: 600; color: #AEBBD0; background: transparent; border: 0; cursor: pointer">{{guide.backLabel}}</button></sc-if>
+          </div>
         </div>
 
         <div style="padding: clamp(16px, 2.6vw, 26px); border: 1px solid #4A5C76; border-radius: 18px; background: #263446; box-shadow: inset 0 0 0 1px rgba(88, 225, 255, 0.08), 0 30px 80px rgba(0, 0, 0, 0.5)">
@@ -1186,7 +1198,8 @@ class Component extends DCLogic {
       agreed: false,
       consentError: false,
       sample: false,
-      blog: false
+      blog: false,
+      guide: (() => { try { const v = JSON.parse(localStorage.getItem('mde_guide_v1') || 'null'); if (v && typeof v.g === 'number') { return v; } } catch (e) {} return { g: 0, pick: null, done: {} }; })()
     };
   }
 
@@ -1219,6 +1232,12 @@ class Component extends DCLogic {
       const box = document.getElementById('recorrido');
       if (box) { jumpTo(box); }
     }
+  }
+
+  guideSet(p) {
+    const n = { ...(this.state.guide || { g: 0, pick: null, done: {} }), ...p };
+    this.setState({ guide: n });
+    try { localStorage.setItem('mde_guide_v1', JSON.stringify(n)); } catch (e) {}
   }
 
   navTo(id, minStage) {
@@ -1831,6 +1850,39 @@ class Component extends DCLogic {
         };
       }),
 
+      guide: (() => {
+        const GT = {"step": "STEP", "of": "OF", "what": "What you will do:", "why": "Why:", "got": "You did it:", "next": "Next step ›", "back": "‹ Previous step", "opts": {"funciones": "Know what my job must deliver", "metas": "Work with clear goals", "cifras": "Measure how my work is going", "comunicacion": "Get my messages across clearly", "ahora": "Get on top of my pending work", "trabajo": "Bring solutions to my boss"}, "ahoraQ": "Do you put things off for later and then have to read them all over again?", "chap": "Chapter", "page": "page", "eg": "For example: ", "lit": "ON", "unlit": "TO TURN ON", "partsIntro": "The course has 8 parts and 52 items. Everyone starts with the Preparation and moves forward in order, one item at a time.", "here": "this is where you learn what you chose", "faqH": "Can I withdraw or return it?", "incl": ["A printed copy of the book, in the language you choose: Spanish or English", "You follow a checklist, step by step, like a pilot", "You take what you learned to your own job", "An artificial intelligence tutor reviews your essays and tells you what to improve", "Direct contact with the authorized representative for any inquiry about your course."], "steps": [{"t": "What would you like to improve at work?", "w": "Choose just one option.", "y": "So this tour speaks to your situation and not to just any job.", "b": "", "g": "You know what you want to improve: "}, {"t": "There is a way to handle this", "w": "Tap the button and read what the book says about what you chose.", "y": "So you see it is not a dead end: the book explains it and shows how to handle it.", "b": "See what the book says", "g": "You saw there is a way to handle it and where it is in the book."}, {"t": "Does this happen to you?", "w": "Read the question and the example, and tell us if it sounds familiar.", "y": "To confirm the course deals with exactly your situation.", "b": "Yes, that happens to me", "g": "You recognized your case: it is exactly what the course works on."}, {"t": "Check your job", "w": "Turn on the points that are already true in your job. Leave the rest off.", "y": "So the course starts from your reality, not from theory.", "b": "Done, I checked my job", "g": "You interacted with the course: your panel is on with your own data."}, {"t": "See your result", "w": "Tap the button to read your panel.", "y": "To know where your job stands today and what you still need to turn on.", "b": "See my result", "g": "You can see where your job stands today."}, {"t": "Get to know the route", "w": "Tap the button to see the full path of the course.", "y": "So you know where you start and where you learn what you chose.", "b": "See the course route", "g": "You know the path: 8 parts, 52 items and where your topic is."}, {"t": "What you get", "w": "Tap the button to see what the course includes and how the law protects you.", "y": "So you decide with all the information, no fine print.", "b": "See what I get", "g": "You understand what you get and what your rights are."}, {"t": "You can decide now", "w": "If the course is right for you, enroll.", "y": "To receive your book and start applying the method in your job.", "b": "Enroll in the course", "g": ""}], "faq": "We follow Colombian Law 1480 of 2011, the Consumer Statute, article 47. If you bought online, you have 5 business days to withdraw, as long as you have not started the course yet. When you enroll, we guide you to activate your course right away so you can start applying it to your job from day one. Once you activate it, the service begins with your authorization and, under that same law, the right of withdrawal no longer applies. If you decide to withdraw before activating it, you must return the book in the same condition you received it; the return shipping is at your expense.", "ready": "READY FOR TAKEOFF", "rev": "CHECK"};
+        const G = this.state.guide || { g: 0, pick: null, done: {} };
+        const g = Math.max(0, Math.min(7, G.g || 0));
+        const S = GT.steps[g];
+        const pk = G.pick && practices[G.pick] ? G.pick : null;
+        const pr = pk ? practices[pk] : null;
+        const done = !!(G.done || {})[g] || (g === 0 && !!pk);
+        const set = (p) => this.guideSet(p);
+        const mark = () => set({ done: { ...(G.done || {}), [g]: true } });
+        const lines = [];
+        if (g === 1 && done && pr) { lines.push({ isQuote: true, text: '“' + pr.bookQuote + '”' }); lines.push({ isText: true, text: GT.chap + ' ' + pr.chapter + ' · ' + pr.chapterName + ' · ' + GT.page + ' ' + pr.bookPage }); lines.push({ isText: true, text: pr.idea }); }
+        if (g === 2 && pr) { const ar = areas.filter((a) => a.id === pk)[0]; lines.push({ isHead: true, text: ar ? ar.text : GT.ahoraQ }); lines.push({ isText: true, text: GT.eg + pr.example }); }
+        if (g === 4 && done) { lines.push({ isHead: true, text: ctrl + '% · ' + (count === 3 ? GT.ready : GT.rev + ' ' + count + '/3') }); preflight.forEach((c) => { const o = !!on[c.id]; lines.push({ isItem: true, color: o ? '#4ADE9A' : '#FFC86B', weight: '600', text: (o ? '● ' + GT.lit : '○ ' + GT.unlit) + ' · ' + c.label + ' · ' + GT.chap + ' ' + c.chapter }); }); }
+        if (g === 5 && done) { const ch = pr ? pr.chapter : null; lines.push({ isText: true, text: GT.partsIntro }); parts.forEach((p, i) => { const hit = ch && p.items.some((it) => it.text.indexOf(GT.chap + ' ' + ch + ':') === 0); lines.push({ isItem: true, color: hit ? '#58E1FF' : '#EAF2FF', weight: hit ? '700' : '500', text: (i + 1) + '. ' + p.name + ' · ' + p.body + (hit ? ' ★ ' + GT.here + ' (' + GT.chap + ' ' + ch + ')' : '') }); }); }
+        if (g === 6 && done) { GT.incl.forEach((x) => lines.push({ isItem: true, color: '#EAF2FF', weight: '500', text: '✓ ' + x })); lines.push({ isHead: true, text: GT.faqH }); lines.push({ isText: true, text: GT.faq }); }
+        const opts = g === 0 ? Object.keys(GT.opts).map((k) => ({ label: GT.opts[k], pressed: pk === k ? 'true' : 'false', fg: pk === k ? '#151C27' : '#EAF2FF', bg: pk === k ? '#58E1FF' : '#1D2735', bd: pk === k ? '#58E1FF' : '#4A5C76', pick: () => set({ pick: k, done: { ...(G.done || {}), 0: true } }) })) : [];
+        const last = g === 7;
+        const go = (n) => { set({ g: n }); if (typeof requestAnimationFrame === 'function') { requestAnimationFrame(() => { const el = document.getElementById('guia'); if (el && el.getBoundingClientRect) { const r = el.getBoundingClientRect(); if (r.top < 60 || r.top > window.innerHeight * 0.6) { jumpTo(el); } } }); } };
+        return {
+          bars: GT.steps.map((x, i) => ({ c: i <= g ? '#58E1FF' : '#3A4A60' })),
+          label: GT.step + ' ' + (g + 1) + ' ' + GT.of + ' 8',
+          title: S.t, whatH: GT.what, what: S.w, whyH: GT.why, why: S.y,
+          hasOpts: g === 0, opts,
+          isPanel: g === 3,
+          hasLines: lines.length > 0, lines: lines.map((l) => ({ isQuote: !!l.isQuote, isHead: !!l.isHead, isText: !!l.isText, isItem: !!l.isItem, color: l.color || '#EAF2FF', weight: l.weight || '500', text: l.text })),
+          isDone: done && !last, gotH: GT.got, got: S.g + (g === 0 && pk ? GT.opts[pk] + '.' : ''),
+          hasBtn: last || done || g > 0,
+          btnLabel: last ? S.b : done ? GT.next : S.b,
+          btn: last ? () => this.navTo('comprar', 6) : done ? () => go(g + 1) : mark,
+          hasBack: g > 0, backLabel: GT.back, backFn: () => go(g - 1)
+        };
+      })(),
       at0: this.state.stage === 0,
       at1: this.state.stage === 1,
       at2: this.state.stage === 2,
