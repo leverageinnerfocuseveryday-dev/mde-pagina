@@ -381,6 +381,19 @@ summary { cursor: pointer; }
 .lt a:hover { color: #073B86; }
 .lt .card-hover:hover { border-color: #0A5BC4; }
 :focus-visible { outline: 3px solid #F5B301; outline-offset: 2px; }
+.topbar { position: sticky; top: 0; z-index: 40; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
+main section[id] { scroll-margin-top: 84px !important; }
+.panelhead { top: 84px !important; }
+@media (max-width: 760px) {
+  .topbar-in { padding: 8px 16px !important; gap: 6px 10px !important; }
+  .topbar .bsub { display: none !important; }
+  .topbar .navsec { order: 3; width: 100%; flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; }
+  .topbar .navsec::-webkit-scrollbar { display: none; }
+  .topbar .navsec button { white-space: nowrap; flex: none; }
+  .topbar .navlang a { padding: 4px 10px !important; min-height: 40px !important; font-size: 15px !important; }
+  main section[id] { scroll-margin-top: 122px !important; }
+  .panelhead { top: 122px !important; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .needle, .horizon, .lamp, .knob, .plane, .card-hover { transition: none; }
@@ -390,14 +403,14 @@ summary { cursor: pointer; }
 
 <div style="width: 100%; color: #EAF2FF; font-family: Inter, system-ui, sans-serif; font-size: 18px; line-height: 1.55; background: #151C27">
 
-  <header style="background: #151C27; border-bottom: 1px solid #3A4A60">
-    <div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between">
+  <header class="topbar" style="background: #151C27; border-bottom: 1px solid #3A4A60">
+    <div class="topbar-in" style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between">
       <a href="#inicio" aria-label="MDE, Breaking the Code course" style="display: inline-flex; align-items: center; gap: 10px; color: #FFFFFF; text-decoration: none">
         <svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><path d="M34 12 H14 V88 H34" fill="none" stroke="#58E1FF" stroke-width="9" stroke-linecap="square"></path><path d="M66 12 H86 V88 H66" fill="none" stroke="#58E1FF" stroke-width="9" stroke-linecap="square"></path><circle cx="50" cy="38" r="12" fill="#FFFFFF"></circle><path d="M43 44 L38 74 H62 L57 44 Z" fill="#FFFFFF"></path></svg>
-        <span><span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">MDE</span><span style="display: block; margin-top: 2px; font-size: 12px; line-height: 1.2">Breaking the Code Course</span></span>
+        <span><span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">MDE</span><span style="display: block; margin-top: 2px; font-size: 12px; line-height: 1.2" class="bsub">Breaking the Code Course</span></span>
       </a>
-      <nav aria-label="Sections" style="display: flex; flex-wrap: wrap; gap: 2px"><button type="button" onClick="{{navSim}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Simulator</button><button type="button" onClick="{{navTips}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Free tips</button><button type="button" onClick="{{navTeams}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Teams</button><button type="button" onClick="{{navEnroll}}" style="min-height: 44px; padding: 6px 16px; font: inherit; font-size: 16px; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 8px; cursor: pointer">Enroll</button></nav>
-      <nav aria-label="Language" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <nav class="navsec" aria-label="Sections" style="display: flex; flex-wrap: wrap; gap: 2px"><button type="button" onClick="{{navSim}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Simulator</button><button type="button" onClick="{{navTips}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Free tips</button><button type="button" onClick="{{navTeams}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Teams</button><button type="button" onClick="{{navEnroll}}" style="min-height: 44px; padding: 6px 16px; font: inherit; font-size: 16px; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 8px; cursor: pointer">Enroll</button></nav>
+      <nav class="navlang" aria-label="Language" style="display: flex; flex-wrap: wrap; gap: 8px">
         <a href="MDE_Cabina_ES.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; box-sizing: border-box; padding: 6px 12px; color: #EAF2FF; text-decoration: none; font-size: 16px; font-weight: 600; border: 1px solid #4A5C76; border-radius: 8px">
           <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true"><rect width="24" height="8" fill="#FCD116"></rect><rect y="8" width="24" height="4" fill="#003893"></rect><rect y="12" width="24" height="4" fill="#CE1126"></rect></svg>
           Español
@@ -425,7 +438,7 @@ summary { cursor: pointer; }
         </div>
 
         <div style="padding: clamp(16px, 2.6vw, 26px); border: 1px solid #4A5C76; border-radius: 18px; background: #263446; box-shadow: inset 0 0 0 1px rgba(88, 225, 255, 0.08), 0 30px 80px rgba(0, 0, 0, 0.5)">
-          <div style="position: sticky; top: 0; z-index: 3; margin: 0 -6px; padding: 8px 6px 10px; background: #263446; border-bottom: 1px solid #3A4A60">
+          <div class="panelhead" style="position: sticky; top: 0; z-index: 3; margin: 0 -6px; padding: 8px 6px 10px; background: #263446; border-bottom: 1px solid #3A4A60">
           <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 10px">
             <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #C5D3E8">YOUR JOB PANEL</p>
             <p role="status" style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; color: {{statusColor}}">{{statusCode}}</p>
@@ -810,88 +823,7 @@ summary { cursor: pointer; }
     </section>
     </sc-if>
 
-    <sc-if value="{{show4}}" hint-placeholder-val="{{ false }}">
-    <section id="tips" class="lt" style="scroll-margin-top: 72px; background: #FAF7F2; color: #17202D; border-top: 1px solid #E4DED3">
-      <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
-        <p style="margin: 0 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">BLOG · FREE TIPS</p>
-        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 50px); line-height: 1.08; letter-spacing: -0.02em">Tips you can use today in your job</h2>
-        <p style="margin: 12px 0 22px; max-width: 46em; color: #3B475A">Six categories, each with a tip from the book and its own simulator. Everything is free and you can try it right now, without enrolling. Pick the one that looks most like your workday.</p>
-        <div role="group" aria-label="Blog categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px">
-          <sc-for list="{{tipCats}}" as="cat" hint-placeholder-count="6">
-            <button type="button" onClick="{{cat.pick}}" aria-pressed="{{cat.pressed}}" style="min-height: 76px; padding: 12px 14px; text-align: left; font: inherit; color: {{cat.fg}}; background: {{cat.bg}}; border: 1px solid {{cat.border}}; border-radius: 12px; cursor: pointer">
-              <span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.15">{{cat.name}}</span>
-              <span style="display: block; margin-top: 4px; font-size: 14px; opacity: 0.85">{{cat.promise}}</span>
-            </button>
-          </sc-for>
-        </div>
-
-        <article style="margin-top: 22px; padding: clamp(20px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
-          <p style="margin: 0 0 8px; color: #0A5BC4; font-weight: 600">{{tip.catName}} · Chapter {{tip.chapter}}</p>
-          <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1">{{tip.title}}</h3>
-          <p style="margin: 10px 0 0; font-size: 18px"><strong>It happens to you if:</strong> {{tip.problem}}</p>
-          <ol style="margin: 12px 0 0; padding-left: 22px; font-size: 17px">
-            <sc-for list="{{tip.steps}}" as="st" hint-placeholder-count="3">
-              <li style="margin-top: 4px">{{st.text}}</li>
-            </sc-for>
-          </ol>
-          <details style="margin-top: 10px; font-size: 15px; color: #3B475A">
-            <summary style="padding: 6px 0">See the quote from the book</summary>
-            <p style="margin: 4px 0 0">“{{tip.quote}}”</p>
-            <p style="margin: 6px 0 0; font-size: 13px; color: #5A6679">Breaking the Code, chapter {{tip.chapter}}, p. {{tip.page}}</p>
-          </details>
-
-          <div style="color: #EAF2FF; margin-top: 14px; padding: 14px 16px 16px; border: 1px solid #4A5C76; border-radius: 12px; background: #1D2735">
-            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600; color: #C5D3E8">Simulator: try it with the data from your job</p>
-            <sc-for list="{{tip.fields}}" as="fl" hint-placeholder-count="3">
-              <div style="margin-top: 10px">
-                <sc-if value="{{fl.isNumber}}" hint-placeholder-val="{{ true }}">
-                  <div>
-                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
-                    <input id="{{fl.id}}" type="number" min="0" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 130px; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 20px; font-weight: 700; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
-                  </div>
-                </sc-if>
-                <sc-if value="{{fl.isText}}" hint-placeholder-val="{{ false }}">
-                  <div>
-                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
-                    <input id="{{fl.id}}" type="text" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 100%; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 17px; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
-                  </div>
-                </sc-if>
-                <sc-if value="{{fl.isCheck}}" hint-placeholder-val="{{ false }}">
-                  <button type="button" onClick="{{fl.toggle}}" aria-pressed="{{fl.pressed}}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 12px; text-align: left; font: inherit; font-size: 16px; color: #EAF2FF; background: #263446; border: 1px solid {{fl.border}}; border-radius: 10px; cursor: pointer">
-                    <span aria-hidden="true" style="flex: 0 0 auto; width: 22px; height: 22px; border-radius: 6px; background: {{fl.box}}; border: 2px solid #58E1FF"></span>
-                    <span>{{fl.label}}</span>
-                  </button>
-                </sc-if>
-              </div>
-            </sc-for>
-
-            <sc-if value="{{tip.hasBars}}" hint-placeholder-val="{{ false }}">
-              <svg viewBox="0 0 320 {{tip.chartH}}" width="100%" style="display: block; max-height: 300px; margin-top: 12px" role="img" aria-label="{{tip.aria}}">
-                <sc-for list="{{tip.bars}}" as="b" hint-placeholder-count="2">
-                  <g>
-                    <text x="10" y="{{b.labelY}}" font-size="12" fill="#C5D3E8">{{b.label}}</text>
-                    <rect x="10" y="{{b.rectY}}" width="{{b.w}}" height="20" rx="4" fill="{{b.color}}"></rect>
-                    <text x="{{b.tx}}" y="{{b.textY}}" font-size="13" font-weight="700" fill="{{b.tfill}}">{{b.text}}</text>
-                  </g>
-                </sc-for>
-              </svg>
-            </sc-if>
-            <p style="margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; color: {{tip.color}}">{{tip.verdict}}</p>
-            <sc-for list="{{tip.lines}}" as="ln" hint-placeholder-count="2">
-              <p style="margin: 6px 0 0; font-size: 16px; color: #EAF2FF">{{ln.text}}</p>
-            </sc-for>
-            <p style="margin: 8px 0 0; font-size: 14px; color: #AEBBD0">{{tip.note}}</p>
-          </div>
-
-          <button type="button" onClick="{{tip.read}}" style="min-height: 50px; margin-top: 14px; padding: 11px 20px; font: inherit; font-weight: 700; color: #17202D; background: transparent; border: 2px solid #0A5BC4; border-radius: 10px; cursor: pointer">{{tip.readLabel}}</button>
-          <p style="margin: 14px 0 0; color: #3B475A">This tip is one part of what is studied, practiced and applied step by step in the course.</p>
-          <button type="button" onClick="{{toCourse}}" style="min-height: 50px; margin-top: 10px; padding: 11px 20px; font: inherit; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">See how the course works</button>
-        </article>
-      </div>
-    </section>
-    </sc-if>
-
-    <sc-if value="{{show5}}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{show5}}" hint-placeholder-val="{{ false }}">
     <section id="opiniones" class="lt" style="background: #E9EFF7; color: #17202D; border-top: 1px solid #D5DCE7">
       <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
         <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #0A5BC4">LOGBOOK</p>
@@ -918,28 +850,11 @@ summary { cursor: pointer; }
       <div style="max-width: 1240px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px; align-items: center">
         <div>
           <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.02em">Read a chapter before you enroll</h2>
-          <p style="margin: 12px 0 0; color: #C5D3E8">Get “Products and Subproducts” free and discover how to define what each job must produce.</p>
+          <p style="margin: 12px 0 0; color: #C5D3E8">Read chapter 9, “Products and Subproducts”, free and exactly as it appears in the book, and discover how to define what each job must produce.</p>
         </div>
         <div style="padding: 22px; border: 1px solid #4A5C76; border-radius: 12px; background: #263446">
-          <sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
-            <div>
-              <label for="correo-c" style="display: block; font-weight: 700; margin-bottom: 8px">Your email</label>
-              <div style="display: flex; flex-wrap: wrap; gap: 10px">
-                <input id="correo-c" type="email" autocomplete="email" placeholder="name@email.com" style="flex: 1 1 220px; min-width: 0; min-height: 52px; box-sizing: border-box; padding: 12px 14px; font: inherit; color: #151C27; background: #FFFFFF; border: 2px solid #58E1FF; border-radius: 10px">
-                <button type="button" onClick="{{send}}" style="min-height: 52px; padding: 12px 20px; font: inherit; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">Send me the chapter</button>
-              </div>
-              <label for="datos-c" style="display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 16px; line-height: 1.4">
-                <input id="datos-c" type="checkbox" checked="{{agreed}}" onChange="{{toggleConsent}}" style="width: 24px; height: 24px; margin: 0; flex: 0 0 auto">
-                <span>I authorize the processing of my data according to the <span data-pending="PRIVACY POLICY" style="display: inline-block; padding: 1px 10px; border: 1px dashed #AEBBD0; border-radius: 10px; font-size: 0.92em; font-style: italic">privacy policy (to be confirmed)</span>.</span>
-              </label>
-              <sc-if value="{{showConsentError}}" hint-placeholder-val="{{ false }}">
-                <p role="alert" style="margin: 10px 0 0; font-size: 16px; font-weight: 600">To send you the chapter, we need your authorization.</p>
-              </sc-if>
-            </div>
-          </sc-if>
-          <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
-            <p role="status" style="margin: 0; font-size: 22px; font-weight: 700">Done. Check your email.</p>
-          </sc-if>
+          <p style="margin: 0 0 14px; color: #C5D3E8">It opens right here on the page. When you finish, you come back to continue the tour.</p>
+          <button type="button" onClick="{{openSample}}" style="min-height: 54px; padding: 14px 24px; font: inherit; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">Read the sample chapter</button>
         </div>
       </div>
       <sc-if value="{{at5}}" hint-placeholder-val="{{ false }}">
@@ -1072,6 +987,117 @@ summary { cursor: pointer; }
   </main>
   </sc-if>
 
+  <sc-if value="{{isBlog}}" hint-placeholder-val="{{ false }}">
+  <main id="blog" class="lt" style="background: #FAF7F2; color: #17202D">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px 0"><button type="button" onClick="{{closeBlog}}" style="min-height: 44px; padding: 8px 4px; font: inherit; font-size: 17px; font-weight: 700; color: #0A5BC4; background: transparent; border: 0; cursor: pointer">‹ Back to the page</button></div>
+    <section id="tips" class="lt" style="scroll-margin-top: 72px; background: #FAF7F2; color: #17202D; border-top: 1px solid #E4DED3">
+      <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
+        <p style="margin: 0 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">BLOG · FREE TIPS</p>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 50px); line-height: 1.08; letter-spacing: -0.02em">Tips you can use today in your job</h2>
+        <p style="margin: 12px 0 22px; max-width: 46em; color: #3B475A">Six categories, each with a tip from the book and its own simulator. Everything is free and you can try it right now, without enrolling. Pick the one that looks most like your workday.</p>
+        <div role="group" aria-label="Blog categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px">
+          <sc-for list="{{tipCats}}" as="cat" hint-placeholder-count="6">
+            <button type="button" onClick="{{cat.pick}}" aria-pressed="{{cat.pressed}}" style="min-height: 76px; padding: 12px 14px; text-align: left; font: inherit; color: {{cat.fg}}; background: {{cat.bg}}; border: 1px solid {{cat.border}}; border-radius: 12px; cursor: pointer">
+              <span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.15">{{cat.name}}</span>
+              <span style="display: block; margin-top: 4px; font-size: 14px; opacity: 0.85">{{cat.promise}}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <article style="margin-top: 22px; padding: clamp(20px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
+          <p style="margin: 0 0 8px; color: #0A5BC4; font-weight: 600">{{tip.catName}} · Chapter {{tip.chapter}}</p>
+          <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1">{{tip.title}}</h3>
+          <p style="margin: 10px 0 0; font-size: 18px"><strong>It happens to you if:</strong> {{tip.problem}}</p>
+          <ol style="margin: 12px 0 0; padding-left: 22px; font-size: 17px">
+            <sc-for list="{{tip.steps}}" as="st" hint-placeholder-count="3">
+              <li style="margin-top: 4px">{{st.text}}</li>
+            </sc-for>
+          </ol>
+          <details style="margin-top: 10px; font-size: 15px; color: #3B475A">
+            <summary style="padding: 6px 0">See the quote from the book</summary>
+            <p style="margin: 4px 0 0">“{{tip.quote}}”</p>
+            <p style="margin: 6px 0 0; font-size: 13px; color: #5A6679">Breaking the Code, chapter {{tip.chapter}}, p. {{tip.page}}</p>
+          </details>
+
+          <div style="color: #EAF2FF; margin-top: 14px; padding: 14px 16px 16px; border: 1px solid #4A5C76; border-radius: 12px; background: #1D2735">
+            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600; color: #C5D3E8">Simulator: try it with the data from your job</p>
+            <sc-for list="{{tip.fields}}" as="fl" hint-placeholder-count="3">
+              <div style="margin-top: 10px">
+                <sc-if value="{{fl.isNumber}}" hint-placeholder-val="{{ true }}">
+                  <div>
+                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
+                    <input id="{{fl.id}}" type="number" min="0" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 130px; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 20px; font-weight: 700; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
+                  </div>
+                </sc-if>
+                <sc-if value="{{fl.isText}}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
+                    <input id="{{fl.id}}" type="text" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 100%; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 17px; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
+                  </div>
+                </sc-if>
+                <sc-if value="{{fl.isCheck}}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{fl.toggle}}" aria-pressed="{{fl.pressed}}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 12px; text-align: left; font: inherit; font-size: 16px; color: #EAF2FF; background: #263446; border: 1px solid {{fl.border}}; border-radius: 10px; cursor: pointer">
+                    <span aria-hidden="true" style="flex: 0 0 auto; width: 22px; height: 22px; border-radius: 6px; background: {{fl.box}}; border: 2px solid #58E1FF"></span>
+                    <span>{{fl.label}}</span>
+                  </button>
+                </sc-if>
+              </div>
+            </sc-for>
+
+            <sc-if value="{{tip.hasBars}}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 320 {{tip.chartH}}" width="100%" style="display: block; max-height: 300px; margin-top: 12px" role="img" aria-label="{{tip.aria}}">
+                <sc-for list="{{tip.bars}}" as="b" hint-placeholder-count="2">
+                  <g>
+                    <text x="10" y="{{b.labelY}}" font-size="12" fill="#C5D3E8">{{b.label}}</text>
+                    <rect x="10" y="{{b.rectY}}" width="{{b.w}}" height="20" rx="4" fill="{{b.color}}"></rect>
+                    <text x="{{b.tx}}" y="{{b.textY}}" font-size="13" font-weight="700" fill="{{b.tfill}}">{{b.text}}</text>
+                  </g>
+                </sc-for>
+              </svg>
+            </sc-if>
+            <p style="margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; color: {{tip.color}}">{{tip.verdict}}</p>
+            <sc-for list="{{tip.lines}}" as="ln" hint-placeholder-count="2">
+              <p style="margin: 6px 0 0; font-size: 16px; color: #EAF2FF">{{ln.text}}</p>
+            </sc-for>
+            <p style="margin: 8px 0 0; font-size: 14px; color: #AEBBD0">{{tip.note}}</p>
+          </div>
+
+          <button type="button" onClick="{{tip.read}}" style="min-height: 50px; margin-top: 14px; padding: 11px 20px; font: inherit; font-weight: 700; color: #17202D; background: transparent; border: 2px solid #0A5BC4; border-radius: 10px; cursor: pointer">{{tip.readLabel}}</button>
+          <p style="margin: 14px 0 0; color: #3B475A">This tip is one part of what is studied, practiced and applied step by step in the course.</p>
+          <button type="button" onClick="{{toCourse}}" style="min-height: 50px; margin-top: 10px; padding: 11px 20px; font: inherit; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">See how the course works</button>
+        </article>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{isSample}}" hint-placeholder-val="{{ false }}">
+  <main id="muestra" class="lt" style="background: #FAF7F2; color: #17202D">
+    <article style="max-width: 760px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) 24px clamp(48px, 7vw, 88px)">
+      <button type="button" onClick="{{closeSample}}" style="min-height: 44px; padding: 8px 4px; font: inherit; font-size: 17px; font-weight: 700; color: #0A5BC4; background: transparent; border: 0; cursor: pointer">‹ Back to the page</button>
+      <p style="margin: 18px 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">SAMPLE CHAPTER</p>
+      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #3B475A">Chapter 9</p>
+      <h1 style="margin: 4px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em">{{sample.title}}</h1>
+      <p style="margin: 10px 0 0; font-size: 15px; color: #5A6679">Breaking the Code · pages 39 to 44</p>
+      <div style="margin-top: 8px">
+        <sc-for list="{{sample.blocks}}" as="sb" hint-placeholder-count="10">
+          <div>
+            <sc-if value="{{sb.isHead}}" hint-placeholder-val="{{ false }}"><h2 style="margin: 30px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(22px, 2.8vw, 28px); line-height: 1.2">{{sb.text}}</h2></sc-if>
+            <sc-if value="{{sb.isPara}}" hint-placeholder-val="{{ true }}"><p style="margin: 14px 0 0; font-size: 19px; line-height: 1.7; color: #17202D">{{sb.text}}</p></sc-if>
+            <sc-if value="{{sb.isNote}}" hint-placeholder-val="{{ false }}"><p style="margin: 12px 0 0 22px; font-size: 17px; line-height: 1.6; color: #3B475A">{{sb.text}}</p></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top: 40px; padding: clamp(22px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
+        <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #0A5BC4">NEXT STEP</p>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.1">This is part of what is studied in the course</h2>
+        <p style="margin: 10px 0 0; font-size: 18px; color: #3B475A">Continue the tour: see what the course includes and build your flight crew.</p>
+        <button type="button" onClick="{{closeSample}}" style="margin-top: 18px; min-height: 54px; padding: 12px 26px; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">Go back and continue: your flight crew</button>
+      </div>
+    </article>
+  </main>
+  </sc-if>
+
   <sc-if value="{{isReading}}" hint-placeholder-val="{{ false }}">
   <main id="lectura" class="lt" style="scroll-margin-top: 0; background: #FAF7F2; color: #17202D">
     <article style="max-width: 760px; margin: 0 auto; padding: clamp(32px, 5vw, 64px) 24px clamp(48px, 7vw, 88px)">
@@ -1130,6 +1156,7 @@ const jumpTo = (el) => {
     requestAnimationFrame(() => { go(); setTimeout(go, 120); setTimeout(go, 450); });
   }
 };
+const SAMPLE_CHAPTER = {"title": "Products and Subproducts", "blocks": [{"isHead": true, "isPara": false, "isNote": false, "text": "PRODUCT DEFINED"}, {"isHead": false, "isPara": true, "isNote": false, "text": "A product is a finished, high-quality service or article in the hands of the consumer as an exchange for a valuable."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Example: Dan is a carpenter. He builds kitchen and bathroom cabinetry. Deborah hired Dan to replace her kitchen cabinetry with solid wood cabinets (article) for an agreed-upon amount of money (a valuable). He constructed beautiful cherry wood cabinets [high quality], finely sanded and sealed with three coats of varnish and decorated with elegant stainless steel hardware (finished). Dan’s installation of the cabinetry (in the hands of the consumer) was flawless. Deborah loved his workmanship and she gladly paid him for his work (exchange)."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Unless it’s exchangeable it’s not a product at all. Product is exchange, exchange is product."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Example: Gary is an artist; he paints with oils. His works have sold well at a gallery owned by Susan. Recently, Gary decided to paint a series of landscapes, which is quite a departure from the modern art for which he’s well known. Susan displayed his landscapes in her gallery for a month and not one piece sold. She finally had to remove the pieces and return them to Gary to make room for artwork that would sell. Even though Gary’s art pieces are finished, high-quality articles, they are not PRODUCTS because they are not “in the hands of the consumer as an exchange for a valuable”."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Even the individual has to put his service or article in the hands of some other employee before it could be called a product."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Example: Lucy works in a chiropractic office. Her job is to keep the schedule book filled, verify insurance coverage prior to the appointments and ensure the patients arrive on time. Last week, Lucy filled the entire appointment book, verified all insurance data and got 95% of the patients to arrive for their appointments. The office manager was thrilled with her production. Lucy met the definition of product, in that her services were finished, high quality and in the hands of her coworkers. She provided an exchange for the valuable (her pay) that she received."}, {"isHead": false, "isPara": false, "isNote": true, "text": "On the other hand, let’s say that Lucy failed to obtain the required insurance information from any of the patients. She did not turn over to the billing clerk the vital data she required for prompt and correct billing. In that case, Lucy could not call that aspect of her job (verifying insurance coverage) a product, as she didn’t put it in the hands of some other employee, namely the billing clerk."}, {"isHead": true, "isPara": false, "isNote": false, "text": "NAME, WANT AND GET YOUR PRODUCT"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Products don’t ever happen by themselves. You have to name them (i.e., specify what your products are), want them and get them."}, {"isHead": true, "isPara": false, "isNote": false, "text": "NAME"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Breaking this down into its parts we find that the most common failure of any employee. lies in the first item, NAME YOUR PRODUCT!"}, {"isHead": false, "isPara": true, "isNote": false, "text": "On org boards, one has products listed. Every employee has one or more products. When you see personnel whirling around and dashing into walls and each other and not producing a thing, chances are, few of them can NAME what products they are trying to produce."}, {"isHead": false, "isPara": true, "isNote": false, "text": "IF PRODUCTION IS NOT OCCURRING, THE ABILITY TO NAME THE PRODUCT IS PROBABLY MISSING."}, {"isHead": true, "isPara": false, "isNote": false, "text": "WANT"}, {"isHead": false, "isPara": true, "isNote": false, "text": "One has to actually WANT the product he is asking for or is trying to produce. One does not have to be in a passionate, mystic daze about wanting the product. But one shouldn’t be moving mountains in the road of a guy trying to carry some lumber to the building site either."}, {"isHead": true, "isPara": false, "isNote": false, "text": "GET"}, {"isHead": false, "isPara": true, "isNote": false, "text": "To GET, you have to know how to organize. One has to spend some time organizing in many different ways—the organization itself, the hatting, the technical skill employees would have to have—to get anywhere in GETTING a product. A manager looks pretty silly trying to order a brick wall built when he doesn’t have any bricks or bricklayer and provides no means at all of obtaining either one."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Sure, if you only organize and never produce, you never get a product either. But if you only produce and never organize, the only brick wall you’ll ever see is the one you run into."}, {"isHead": true, "isPara": false, "isNote": false, "text": "VALUABLE FINAL PRODUCTS"}, {"isHead": false, "isPara": true, "isNote": false, "text": "By definition, a valuable final product is something that can be exchanged with other activities (e.g., a division, a company, a community, etc.) in return for support. The support usually adds up to food, clothing, shelter, money, tolerance and cooperation (goodwill)."}, {"isHead": false, "isPara": true, "isNote": false, "text": "On an individual basis this is easy to grasp. The individual produces a product or products which, flowed into the department, division, organization, company, community, state, nation or planet, then returns to him his pay and goodwill or at least sufficient goodwill to prevent his abandonment or destruction. Long-range survival of the individual is attained in this fashion."}, {"isHead": false, "isPara": true, "isNote": false, "text": "A valuable final product (VFP) is valuable because it is potentially or factually exchangeable. The key word in this sense is EXCHANGEABLE. And exchangeability means outside, with something outside the person or activity (an organizational unit, e.g., section, department). A valuable final product could as easily be named a VALUABLE EXCHANGEABLE PRODUCT."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Parts of organizations, organizations, towns, states and countries all follow the principles which apply to the individual. The survival or value of any section, department, division or organization is whether or not it follows these principles of exchange. Therefore it is vital that a person or a section, department, division, part of an organization or an organization figures out exactly what it is exchanging. It is producing something that is valuable to the activity or activities with which it is in communication and for doing that it is obtaining support. If it is actually producing valuable final products, then it is entitled to support."}, {"isHead": false, "isPara": true, "isNote": false, "text": "The basics of valuable final products are true for any industrial or political or economic system. Many systems attempt to avoid these basics, and in such cases, the end result would be disaster. The individual, section, department, division, organization or country that is not producing something valuable enough to exchange will not be supported for long. It is as simple as that."}, {"isHead": true, "isPara": false, "isNote": false, "text": "COMPILING A SUBPRODUCT LIST"}, {"isHead": false, "isPara": true, "isNote": false, "text": "If a person or any part of his company is only organizing or hoping or PRing and is not producing an exchangeable commodity or commodities in VOLUME or QUALITY for which support can be elicited and even demanded, that person or part of the company will not be VIABLE (capable of success or continuing effectiveness). It doesn't matter how many orders are issued or how well org boards are drawn or beautiful the plans to produce are made. The hard fact of production remains the dominant fact."}, {"isHead": false, "isPara": true, "isNote": false, "text": "How well organized things are increases production volume and improves quality and thus can bring about viability. But it is the valuable final product, there and being exchanged, that determines basic survival. Lack of viability can always be traced to the volume and quality of an actual valuable final product."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Hope of a product has a short-term value that permits an activity to be built. But when the hope does not materialize into a product, then any hoped-for viability also collapses. One then must organize back from the actually produced product."}, {"isHead": false, "isPara": true, "isNote": false, "text": "If you take any VFP and trace it backwards step by step, using a BE–DO–HAVE breakdown of what it took to create it, and then wrote up the list as preliminaries (i.e., the sequential actions that result in the VFP), you would have a subproduct list."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Example: Mark is a seminar coordinator. He’s in charge of setting up seminars for his company at hotel conference rooms throughout the country. The seminars must be scheduled three months in advance and result in maximum attendance with all required personnel and materials present. His VFP is “Well planned and successfully delivered seminars.”"}, {"isHead": false, "isPara": true, "isNote": false, "text": "The minimum subproducts list would divide into what he had to BE, what he had to DO and what he had to HAVE to wind up with a well planned and successfully delivered seminar:"}, {"isHead": false, "isPara": true, "isNote": false, "text": "If, at some future date, Mark found out there was something wrong with his valuable final product, all he would have to do is assess this list and find out why no VFP. The subproducts that he omitted and the wrong objectives that he pursued would leap from the page at him and, if handled, could result in his VFP quite promptly."}, {"isHead": false, "isPara": true, "isNote": false, "text": "A valid subproduct list will greatly increase organization efficiency and show up holes. As it is VFPs which keep an organization going, not promises or hope, you can see that a subproduct list is vital to straighten out an area."}, {"isHead": false, "isPara": true, "isNote": false, "text": "By assessing the subproduct lists against a direct inspection of the area to which it applies, one can see the major things that are missing. It is these missing things which are preventing the attainment of the valuable final product of the area, so vital to the organization’s survival."}, {"isHead": false, "isPara": true, "isNote": false, "text": "The test of any subproduct list is: Is it resulting in VFPs? If not, somebody has been busy making a staff busy (i.e., with busywork – work that consumes time but doesn’t yield productive results). The test of a correct subproduct list is: Does it result in good VFPs when used?"}]};
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -1154,21 +1181,27 @@ class Component extends DCLogic {
       part: 'organizacion',
       sent: false,
       agreed: false,
-      consentError: false
+      consentError: false,
+      sample: false,
+      blog: false
     };
   }
 
   componentDidUpdate() {
-    const prev = this._prev || { stage: 0, reading: null, pos: 0 };
-    this._prev = { stage: this.state.stage, reading: this.state.reading, pos: this.state.pos };
-    if (prev.reading !== this.state.reading) {
-      if (this.state.reading) {
-        const top = document.getElementById('lectura');
-        if (top) { jumpTo(top); }
+    const prev = this._prev || { stage: 0, reading: null, pos: 0, sample: false, blog: false };
+    this._prev = { stage: this.state.stage, reading: this.state.reading, pos: this.state.pos, sample: this.state.sample, blog: this.state.blog };
+    if (prev.reading !== this.state.reading || prev.sample !== this.state.sample || prev.blog !== this.state.blog) {
+      const toTop = () => { if (typeof window !== 'undefined') { window.scrollTo(0, 0); } };
+      if ((this.state.reading && prev.reading !== this.state.reading) || (this.state.sample && !prev.sample) || (this.state.blog && !this.state.reading)) {
+        toTop(); if (typeof requestAnimationFrame === 'function') { requestAnimationFrame(() => { toTop(); setTimeout(toTop, 120); }); }
+        if (this.state.goTo) { this.setState({ goTo: null }); }
       } else if (this.state.goTo) {
         const dest = document.getElementById(this.state.goTo);
         if (dest) { jumpTo(dest); }
         this.setState({ goTo: null });
+      } else if (prev.blog && !this.state.blog) {
+        const y = this._blogY || 0; const back = () => { if (typeof window !== 'undefined') { window.scrollTo(0, y); } };
+        back(); if (typeof requestAnimationFrame === 'function') { requestAnimationFrame(() => { back(); setTimeout(back, 120); setTimeout(back, 450); }); }
       }
       return;
     }
@@ -1186,6 +1219,7 @@ class Component extends DCLogic {
   }
 
   navTo(id, minStage) {
+    if (this.state.blog || this.state.sample || this.state.reading) { this.setState({ blog: false, sample: false, reading: null, goTo: id, stage: Math.max(this.state.stage, minStage) }); return; }
     if (this.state.stage < minStage) { this.setState({ stage: minStage, navId: id }); }
     else { jumpTo(document.getElementById(id)); }
   }
@@ -1751,7 +1785,7 @@ class Component extends DCLogic {
     } : { blocks: [] };
     tipView.readLabel = 'Enter to read the full text (' + minutesOf(tipSel.id) + ' min)';
     tipView.read = () => this.setState({ reading: tipSel.id });
-    const leaveReading = (target, stageMin) => () => this.setState({ reading: null, goTo: target, stage: Math.max(this.state.stage, stageMin) });
+    const leaveReading = (target, stageMin) => () => this.setState({ reading: null, blog: false, goTo: target, stage: Math.max(this.state.stage, stageMin) });
 
     const parts = [
       { id: 'entender', name: 'Increasing Understanding & Discovering One’s Power', title: 'Increasing Understanding & Discovering One’s Power', body: 'Chapters 1 and 2', items: [{ text: 'Chapter 1: The A-R-C Triangle · page 1' }, { text: 'Chapter 2: The K-R-C Triangle · page 9' }] },
@@ -1810,11 +1844,18 @@ class Component extends DCLogic {
       show7: this.state.stage >= 7,
       advance: () => this.setState({ stage: Math.min(7, this.state.stage + 1) }),
       navSim: () => this.navTo('recorrido', 3),
-      navTips: () => this.navTo('tips', 4),
+      navTips: () => { if (!this.state.blog && !this.state.sample && !this.state.reading && typeof window !== 'undefined') { this._blogY = window.scrollY; } this.setState({ blog: true, reading: null, sample: false }); },
+      closeBlog: () => this.setState({ blog: false }),
+      openSample: () => this.setState({ sample: true }),
+      closeSample: () => this.setState({ sample: false, goTo: 'comprar', stage: Math.max(this.state.stage, 6) }),
+      isBlog: this.state.blog && !this.state.reading,
+      isSample: this.state.sample,
+      sample: SAMPLE_CHAPTER,
       navTeams: () => this.navTo('comprar', 6),
       navEnroll: () => this.navTo('comprar', 6),
       showUnverified: false,
       toCourse: () => {
+        if (this.state.blog) { this.setState({ blog: false, goTo: 'funciona', stage: Math.max(this.state.stage, 4) }); return; }
         if (this.state.stage < 4) {
           this.setState({ stage: 4 });
         } else {
@@ -1849,10 +1890,10 @@ class Component extends DCLogic {
       quote,
       reading: readingView,
       isReading: !!readingEntry,
-      notReading: !readingEntry,
+      notReading: !readingEntry && !this.state.blog && !this.state.sample,
       readToCourse: leaveReading('funciona', 4),
       readEnroll: leaveReading('comprar', 6),
-      readBack: leaveReading('tips', 4),
+      readBack: () => this.setState({ reading: null, blog: true }),
       tip: tipView,
       tipCats,
       hasChart: !!chartData,

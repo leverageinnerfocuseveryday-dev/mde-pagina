@@ -381,6 +381,19 @@ summary { cursor: pointer; }
 .lt a:hover { color: #073B86; }
 .lt .card-hover:hover { border-color: #0A5BC4; }
 :focus-visible { outline: 3px solid #F5B301; outline-offset: 2px; }
+.topbar { position: sticky; top: 0; z-index: 40; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
+main section[id] { scroll-margin-top: 84px !important; }
+.panelhead { top: 84px !important; }
+@media (max-width: 760px) {
+  .topbar-in { padding: 8px 16px !important; gap: 6px 10px !important; }
+  .topbar .bsub { display: none !important; }
+  .topbar .navsec { order: 3; width: 100%; flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; }
+  .topbar .navsec::-webkit-scrollbar { display: none; }
+  .topbar .navsec button { white-space: nowrap; flex: none; }
+  .topbar .navlang a { padding: 4px 10px !important; min-height: 40px !important; font-size: 15px !important; }
+  main section[id] { scroll-margin-top: 122px !important; }
+  .panelhead { top: 122px !important; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .needle, .horizon, .lamp, .knob, .plane, .card-hover { transition: none; }
@@ -390,14 +403,14 @@ summary { cursor: pointer; }
 
 <div style="width: 100%; color: #EAF2FF; font-family: Inter, system-ui, sans-serif; font-size: 18px; line-height: 1.55; background: #151C27">
 
-  <header style="background: #151C27; border-bottom: 1px solid #3A4A60">
-    <div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between">
+  <header class="topbar" style="background: #151C27; border-bottom: 1px solid #3A4A60">
+    <div class="topbar-in" style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between">
       <a href="#inicio" aria-label="MDE, curso El Manual de Estrategias para Empleados" style="display: inline-flex; align-items: center; gap: 10px; color: #FFFFFF; text-decoration: none">
         <svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><path d="M34 12 H14 V88 H34" fill="none" stroke="#58E1FF" stroke-width="9" stroke-linecap="square"></path><path d="M66 12 H86 V88 H66" fill="none" stroke="#58E1FF" stroke-width="9" stroke-linecap="square"></path><circle cx="50" cy="38" r="12" fill="#FFFFFF"></circle><path d="M43 44 L38 74 H62 L57 44 Z" fill="#FFFFFF"></path></svg>
-        <span><span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">MDE</span><span style="display: block; margin-top: 2px; font-size: 12px; line-height: 1.2">Manual de Estrategias para Empleados</span></span>
+        <span><span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">MDE</span><span style="display: block; margin-top: 2px; font-size: 12px; line-height: 1.2" class="bsub">Manual de Estrategias para Empleados</span></span>
       </a>
-      <nav aria-label="Secciones" style="display: flex; flex-wrap: wrap; gap: 2px"><button type="button" onClick="{{navSim}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Simulador</button><button type="button" onClick="{{navTips}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Tips gratis</button><button type="button" onClick="{{navTeams}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Equipos</button><button type="button" onClick="{{navEnroll}}" style="min-height: 44px; padding: 6px 16px; font: inherit; font-size: 16px; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 8px; cursor: pointer">Inscribirme</button></nav>
-      <nav aria-label="Idioma" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <nav class="navsec" aria-label="Secciones" style="display: flex; flex-wrap: wrap; gap: 2px"><button type="button" onClick="{{navSim}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Simulador</button><button type="button" onClick="{{navTips}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Tips gratis</button><button type="button" onClick="{{navTeams}}" style="min-height: 44px; padding: 6px 12px; font: inherit; font-size: 16px; font-weight: 600; color: #EAF2FF; background: transparent; border: 0; border-radius: 8px; cursor: pointer">Equipos</button><button type="button" onClick="{{navEnroll}}" style="min-height: 44px; padding: 6px 16px; font: inherit; font-size: 16px; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 8px; cursor: pointer">Inscribirme</button></nav>
+      <nav class="navlang" aria-label="Idioma" style="display: flex; flex-wrap: wrap; gap: 8px">
         <a href="MDE_Cabina_ES.html" aria-current="page" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; box-sizing: border-box; padding: 6px 12px; color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 700; border: 2px solid #58E1FF; border-radius: 8px">
           <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true"><rect width="24" height="8" fill="#FCD116"></rect><rect y="8" width="24" height="4" fill="#003893"></rect><rect y="12" width="24" height="4" fill="#CE1126"></rect></svg>
           Español
@@ -425,7 +438,7 @@ summary { cursor: pointer; }
         </div>
 
         <div style="padding: clamp(16px, 2.6vw, 26px); border: 1px solid #4A5C76; border-radius: 18px; background: #263446; box-shadow: inset 0 0 0 1px rgba(88, 225, 255, 0.08), 0 30px 80px rgba(0, 0, 0, 0.5)">
-          <div style="position: sticky; top: 0; z-index: 3; margin: 0 -6px; padding: 8px 6px 10px; background: #263446; border-bottom: 1px solid #3A4A60">
+          <div class="panelhead" style="position: sticky; top: 0; z-index: 3; margin: 0 -6px; padding: 8px 6px 10px; background: #263446; border-bottom: 1px solid #3A4A60">
           <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 10px">
             <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #C5D3E8">PANEL DE TU PUESTO</p>
             <p role="status" style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; color: {{statusColor}}">{{statusCode}}</p>
@@ -810,88 +823,7 @@ summary { cursor: pointer; }
     </section>
     </sc-if>
 
-    <sc-if value="{{show4}}" hint-placeholder-val="{{ false }}">
-    <section id="tips" class="lt" style="scroll-margin-top: 72px; background: #FAF7F2; color: #17202D; border-top: 1px solid #E4DED3">
-      <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
-        <p style="margin: 0 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">BLOG · TIPS GRATIS</p>
-        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 50px); line-height: 1.08; letter-spacing: -0.02em">Tips que puedes usar hoy en tu puesto</h2>
-        <p style="margin: 12px 0 22px; max-width: 46em; color: #3B475A">Seis categorías, cada una con un tip del libro y su propio simulador. Todo es gratis y lo puedes probar ahora mismo, sin inscribirte. Elige la que más se parezca a tu día de trabajo.</p>
-        <div role="group" aria-label="Categorías del blog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px">
-          <sc-for list="{{tipCats}}" as="cat" hint-placeholder-count="6">
-            <button type="button" onClick="{{cat.pick}}" aria-pressed="{{cat.pressed}}" style="min-height: 76px; padding: 12px 14px; text-align: left; font: inherit; color: {{cat.fg}}; background: {{cat.bg}}; border: 1px solid {{cat.border}}; border-radius: 12px; cursor: pointer">
-              <span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.15">{{cat.name}}</span>
-              <span style="display: block; margin-top: 4px; font-size: 14px; opacity: 0.85">{{cat.promise}}</span>
-            </button>
-          </sc-for>
-        </div>
-
-        <article style="margin-top: 22px; padding: clamp(20px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
-          <p style="margin: 0 0 8px; color: #0A5BC4; font-weight: 600">{{tip.catName}} · Capítulo {{tip.chapter}}</p>
-          <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1">{{tip.title}}</h3>
-          <p style="margin: 10px 0 0; font-size: 18px"><strong>Te pasa si:</strong> {{tip.problem}}</p>
-          <ol style="margin: 12px 0 0; padding-left: 22px; font-size: 17px">
-            <sc-for list="{{tip.steps}}" as="st" hint-placeholder-count="3">
-              <li style="margin-top: 4px">{{st.text}}</li>
-            </sc-for>
-          </ol>
-          <details style="margin-top: 10px; font-size: 15px; color: #3B475A">
-            <summary style="padding: 6px 0">Ver la cita del libro</summary>
-            <p style="margin: 4px 0 0">“{{tip.quote}}”</p>
-            <p style="margin: 6px 0 0; font-size: 13px; color: #5A6679">El manual de estrategias para empleados, capítulo {{tip.chapter}}, página {{tip.page}}</p>
-          </details>
-
-          <div style="color: #EAF2FF; margin-top: 14px; padding: 14px 16px 16px; border: 1px solid #4A5C76; border-radius: 12px; background: #1D2735">
-            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600; color: #C5D3E8">Simulador: pruébalo con los datos de tu puesto</p>
-            <sc-for list="{{tip.fields}}" as="fl" hint-placeholder-count="3">
-              <div style="margin-top: 10px">
-                <sc-if value="{{fl.isNumber}}" hint-placeholder-val="{{ true }}">
-                  <div>
-                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
-                    <input id="{{fl.id}}" type="number" min="0" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 130px; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 20px; font-weight: 700; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
-                  </div>
-                </sc-if>
-                <sc-if value="{{fl.isText}}" hint-placeholder-val="{{ false }}">
-                  <div>
-                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
-                    <input id="{{fl.id}}" type="text" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 100%; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 17px; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
-                  </div>
-                </sc-if>
-                <sc-if value="{{fl.isCheck}}" hint-placeholder-val="{{ false }}">
-                  <button type="button" onClick="{{fl.toggle}}" aria-pressed="{{fl.pressed}}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 12px; text-align: left; font: inherit; font-size: 16px; color: #EAF2FF; background: #263446; border: 1px solid {{fl.border}}; border-radius: 10px; cursor: pointer">
-                    <span aria-hidden="true" style="flex: 0 0 auto; width: 22px; height: 22px; border-radius: 6px; background: {{fl.box}}; border: 2px solid #58E1FF"></span>
-                    <span>{{fl.label}}</span>
-                  </button>
-                </sc-if>
-              </div>
-            </sc-for>
-
-            <sc-if value="{{tip.hasBars}}" hint-placeholder-val="{{ false }}">
-              <svg viewBox="0 0 320 {{tip.chartH}}" width="100%" style="display: block; max-height: 300px; margin-top: 12px" role="img" aria-label="{{tip.aria}}">
-                <sc-for list="{{tip.bars}}" as="b" hint-placeholder-count="2">
-                  <g>
-                    <text x="10" y="{{b.labelY}}" font-size="12" fill="#C5D3E8">{{b.label}}</text>
-                    <rect x="10" y="{{b.rectY}}" width="{{b.w}}" height="20" rx="4" fill="{{b.color}}"></rect>
-                    <text x="{{b.tx}}" y="{{b.textY}}" font-size="13" font-weight="700" fill="{{b.tfill}}">{{b.text}}</text>
-                  </g>
-                </sc-for>
-              </svg>
-            </sc-if>
-            <p style="margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; color: {{tip.color}}">{{tip.verdict}}</p>
-            <sc-for list="{{tip.lines}}" as="ln" hint-placeholder-count="2">
-              <p style="margin: 6px 0 0; font-size: 16px; color: #EAF2FF">{{ln.text}}</p>
-            </sc-for>
-            <p style="margin: 8px 0 0; font-size: 14px; color: #AEBBD0">{{tip.note}}</p>
-          </div>
-
-          <button type="button" onClick="{{tip.read}}" style="min-height: 50px; margin-top: 14px; padding: 11px 20px; font: inherit; font-weight: 700; color: #17202D; background: transparent; border: 2px solid #0A5BC4; border-radius: 10px; cursor: pointer">{{tip.readLabel}}</button>
-          <p style="margin: 14px 0 0; color: #3B475A">Este tip es una parte de lo que se estudia, se practica y se aplica paso a paso en el curso.</p>
-          <button type="button" onClick="{{toCourse}}" style="min-height: 50px; margin-top: 10px; padding: 11px 20px; font: inherit; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">Ver cómo funciona el curso</button>
-        </article>
-      </div>
-    </section>
-    </sc-if>
-
-    <sc-if value="{{show5}}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{show5}}" hint-placeholder-val="{{ false }}">
     <section id="opiniones" class="lt" style="background: #E9EFF7; color: #17202D; border-top: 1px solid #D5DCE7">
       <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
         <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #0A5BC4">BITÁCORA</p>
@@ -918,28 +850,11 @@ summary { cursor: pointer; }
       <div style="max-width: 1240px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px; align-items: center">
         <div>
           <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.02em">Lee un capítulo antes de inscribirte</h2>
-          <p style="margin: 12px 0 0; color: #C5D3E8">Recibe gratis “Productos y subproductos” y descubre cómo definir qué debe producir cada puesto.</p>
+          <p style="margin: 12px 0 0; color: #C5D3E8">Lee gratis el capítulo 9, “Productos y Subproductos”, tal como aparece en el libro, y descubre cómo definir qué debe producir cada puesto.</p>
         </div>
         <div style="padding: 22px; border: 1px solid #4A5C76; border-radius: 12px; background: #263446">
-          <sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
-            <div>
-              <label for="correo-c" style="display: block; font-weight: 700; margin-bottom: 8px">Tu correo electrónico</label>
-              <div style="display: flex; flex-wrap: wrap; gap: 10px">
-                <input id="correo-c" type="email" autocomplete="email" placeholder="nombre@correo.com" style="flex: 1 1 220px; min-width: 0; min-height: 52px; box-sizing: border-box; padding: 12px 14px; font: inherit; color: #151C27; background: #FFFFFF; border: 2px solid #58E1FF; border-radius: 10px">
-                <button type="button" onClick="{{send}}" style="min-height: 52px; padding: 12px 20px; font: inherit; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">Enviarme el capítulo</button>
-              </div>
-              <label for="datos-c" style="display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 16px; line-height: 1.4">
-                <input id="datos-c" type="checkbox" checked="{{agreed}}" onChange="{{toggleConsent}}" style="width: 24px; height: 24px; margin: 0; flex: 0 0 auto">
-                <span>Autorizo el tratamiento de mis datos según la <span data-pending="POLÍTICA DE DATOS" style="display: inline-block; padding: 1px 10px; border: 1px dashed #AEBBD0; border-radius: 10px; font-size: 0.92em; font-style: italic">política de datos (por confirmar)</span>.</span>
-              </label>
-              <sc-if value="{{showConsentError}}" hint-placeholder-val="{{ false }}">
-                <p role="alert" style="margin: 10px 0 0; font-size: 16px; font-weight: 600">Para enviarte el capítulo, necesitamos tu autorización.</p>
-              </sc-if>
-            </div>
-          </sc-if>
-          <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
-            <p role="status" style="margin: 0; font-size: 22px; font-weight: 700">Listo. Revisa tu correo.</p>
-          </sc-if>
+          <p style="margin: 0 0 14px; color: #C5D3E8">Se abre aquí mismo, en la página. Cuando termines, vuelves para seguir con el recorrido.</p>
+          <button type="button" onClick="{{openSample}}" style="min-height: 54px; padding: 14px 24px; font: inherit; font-weight: 700; color: #151C27; background: #58E1FF; border: 0; border-radius: 10px; cursor: pointer">Leer el capítulo de muestra</button>
         </div>
       </div>
       <sc-if value="{{at5}}" hint-placeholder-val="{{ false }}">
@@ -1072,6 +987,117 @@ summary { cursor: pointer; }
   </main>
   </sc-if>
 
+  <sc-if value="{{isBlog}}" hint-placeholder-val="{{ false }}">
+  <main id="blog" class="lt" style="background: #FAF7F2; color: #17202D">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px 0"><button type="button" onClick="{{closeBlog}}" style="min-height: 44px; padding: 8px 4px; font: inherit; font-size: 17px; font-weight: 700; color: #0A5BC4; background: transparent; border: 0; cursor: pointer">‹ Volver a la página</button></div>
+    <section id="tips" class="lt" style="scroll-margin-top: 72px; background: #FAF7F2; color: #17202D; border-top: 1px solid #E4DED3">
+      <div style="max-width: 1240px; margin: 0 auto; padding: clamp(44px, 6vw, 84px) 24px">
+        <p style="margin: 0 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">BLOG · TIPS GRATIS</p>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 50px); line-height: 1.08; letter-spacing: -0.02em">Tips que puedes usar hoy en tu puesto</h2>
+        <p style="margin: 12px 0 22px; max-width: 46em; color: #3B475A">Seis categorías, cada una con un tip del libro y su propio simulador. Todo es gratis y lo puedes probar ahora mismo, sin inscribirte. Elige la que más se parezca a tu día de trabajo.</p>
+        <div role="group" aria-label="Categorías del blog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px">
+          <sc-for list="{{tipCats}}" as="cat" hint-placeholder-count="6">
+            <button type="button" onClick="{{cat.pick}}" aria-pressed="{{cat.pressed}}" style="min-height: 76px; padding: 12px 14px; text-align: left; font: inherit; color: {{cat.fg}}; background: {{cat.bg}}; border: 1px solid {{cat.border}}; border-radius: 12px; cursor: pointer">
+              <span style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.15">{{cat.name}}</span>
+              <span style="display: block; margin-top: 4px; font-size: 14px; opacity: 0.85">{{cat.promise}}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <article style="margin-top: 22px; padding: clamp(20px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
+          <p style="margin: 0 0 8px; color: #0A5BC4; font-weight: 600">{{tip.catName}} · Capítulo {{tip.chapter}}</p>
+          <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.1">{{tip.title}}</h3>
+          <p style="margin: 10px 0 0; font-size: 18px"><strong>Te pasa si:</strong> {{tip.problem}}</p>
+          <ol style="margin: 12px 0 0; padding-left: 22px; font-size: 17px">
+            <sc-for list="{{tip.steps}}" as="st" hint-placeholder-count="3">
+              <li style="margin-top: 4px">{{st.text}}</li>
+            </sc-for>
+          </ol>
+          <details style="margin-top: 10px; font-size: 15px; color: #3B475A">
+            <summary style="padding: 6px 0">Ver la cita del libro</summary>
+            <p style="margin: 4px 0 0">“{{tip.quote}}”</p>
+            <p style="margin: 6px 0 0; font-size: 13px; color: #5A6679">El manual de estrategias para empleados, capítulo {{tip.chapter}}, página {{tip.page}}</p>
+          </details>
+
+          <div style="color: #EAF2FF; margin-top: 14px; padding: 14px 16px 16px; border: 1px solid #4A5C76; border-radius: 12px; background: #1D2735">
+            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600; color: #C5D3E8">Simulador: pruébalo con los datos de tu puesto</p>
+            <sc-for list="{{tip.fields}}" as="fl" hint-placeholder-count="3">
+              <div style="margin-top: 10px">
+                <sc-if value="{{fl.isNumber}}" hint-placeholder-val="{{ true }}">
+                  <div>
+                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
+                    <input id="{{fl.id}}" type="number" min="0" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 130px; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 20px; font-weight: 700; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
+                  </div>
+                </sc-if>
+                <sc-if value="{{fl.isText}}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <label for="{{fl.id}}" style="display: block; font-size: 16px; font-weight: 600">{{fl.label}}</label>
+                    <input id="{{fl.id}}" type="text" value="{{fl.value}}" onChange="{{fl.change}}" style="width: 100%; min-height: 48px; box-sizing: border-box; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 17px; color: #FFFFFF; background: #263446; border: 1px solid #58E1FF; border-radius: 10px">
+                  </div>
+                </sc-if>
+                <sc-if value="{{fl.isCheck}}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{fl.toggle}}" aria-pressed="{{fl.pressed}}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 12px; text-align: left; font: inherit; font-size: 16px; color: #EAF2FF; background: #263446; border: 1px solid {{fl.border}}; border-radius: 10px; cursor: pointer">
+                    <span aria-hidden="true" style="flex: 0 0 auto; width: 22px; height: 22px; border-radius: 6px; background: {{fl.box}}; border: 2px solid #58E1FF"></span>
+                    <span>{{fl.label}}</span>
+                  </button>
+                </sc-if>
+              </div>
+            </sc-for>
+
+            <sc-if value="{{tip.hasBars}}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 320 {{tip.chartH}}" width="100%" style="display: block; max-height: 300px; margin-top: 12px" role="img" aria-label="{{tip.aria}}">
+                <sc-for list="{{tip.bars}}" as="b" hint-placeholder-count="2">
+                  <g>
+                    <text x="10" y="{{b.labelY}}" font-size="12" fill="#C5D3E8">{{b.label}}</text>
+                    <rect x="10" y="{{b.rectY}}" width="{{b.w}}" height="20" rx="4" fill="{{b.color}}"></rect>
+                    <text x="{{b.tx}}" y="{{b.textY}}" font-size="13" font-weight="700" fill="{{b.tfill}}">{{b.text}}</text>
+                  </g>
+                </sc-for>
+              </svg>
+            </sc-if>
+            <p style="margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; color: {{tip.color}}">{{tip.verdict}}</p>
+            <sc-for list="{{tip.lines}}" as="ln" hint-placeholder-count="2">
+              <p style="margin: 6px 0 0; font-size: 16px; color: #EAF2FF">{{ln.text}}</p>
+            </sc-for>
+            <p style="margin: 8px 0 0; font-size: 14px; color: #AEBBD0">{{tip.note}}</p>
+          </div>
+
+          <button type="button" onClick="{{tip.read}}" style="min-height: 50px; margin-top: 14px; padding: 11px 20px; font: inherit; font-weight: 700; color: #17202D; background: transparent; border: 2px solid #0A5BC4; border-radius: 10px; cursor: pointer">{{tip.readLabel}}</button>
+          <p style="margin: 14px 0 0; color: #3B475A">Este tip es una parte de lo que se estudia, se practica y se aplica paso a paso en el curso.</p>
+          <button type="button" onClick="{{toCourse}}" style="min-height: 50px; margin-top: 10px; padding: 11px 20px; font: inherit; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">Ver cómo funciona el curso</button>
+        </article>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{isSample}}" hint-placeholder-val="{{ false }}">
+  <main id="muestra" class="lt" style="background: #FAF7F2; color: #17202D">
+    <article style="max-width: 760px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) 24px clamp(48px, 7vw, 88px)">
+      <button type="button" onClick="{{closeSample}}" style="min-height: 44px; padding: 8px 4px; font: inherit; font-size: 17px; font-weight: 700; color: #0A5BC4; background: transparent; border: 0; cursor: pointer">‹ Volver a la página</button>
+      <p style="margin: 18px 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: 0.08em; color: #0A5BC4">CAPÍTULO DE MUESTRA</p>
+      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #3B475A">Capítulo 9</p>
+      <h1 style="margin: 4px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em">{{sample.title}}</h1>
+      <p style="margin: 10px 0 0; font-size: 15px; color: #5A6679">El Manual de Estrategias para Empleados · páginas 43 a 48</p>
+      <div style="margin-top: 8px">
+        <sc-for list="{{sample.blocks}}" as="sb" hint-placeholder-count="10">
+          <div>
+            <sc-if value="{{sb.isHead}}" hint-placeholder-val="{{ false }}"><h2 style="margin: 30px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(22px, 2.8vw, 28px); line-height: 1.2">{{sb.text}}</h2></sc-if>
+            <sc-if value="{{sb.isPara}}" hint-placeholder-val="{{ true }}"><p style="margin: 14px 0 0; font-size: 19px; line-height: 1.7; color: #17202D">{{sb.text}}</p></sc-if>
+            <sc-if value="{{sb.isNote}}" hint-placeholder-val="{{ false }}"><p style="margin: 12px 0 0 22px; font-size: 17px; line-height: 1.6; color: #3B475A">{{sb.text}}</p></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top: 40px; padding: clamp(22px, 3vw, 34px); border: 1px solid #0A5BC4; border-radius: 16px; background: #FFFFFF">
+        <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.08em; color: #0A5BC4">SIGUIENTE PASO</p>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.1">Esto es una parte de lo que se estudia en el curso</h2>
+        <p style="margin: 10px 0 0; font-size: 18px; color: #3B475A">Sigue con el recorrido: conoce qué incluye el curso y arma tu equipo de vuelo.</p>
+        <button type="button" onClick="{{closeSample}}" style="margin-top: 18px; min-height: 54px; padding: 12px 26px; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; background: #0A5BC4; border: 0; border-radius: 10px; cursor: pointer">Volver y seguir: tu equipo de vuelo</button>
+      </div>
+    </article>
+  </main>
+  </sc-if>
+
   <sc-if value="{{isReading}}" hint-placeholder-val="{{ false }}">
   <main id="lectura" class="lt" style="scroll-margin-top: 0; background: #FAF7F2; color: #17202D">
     <article style="max-width: 760px; margin: 0 auto; padding: clamp(32px, 5vw, 64px) 24px clamp(48px, 7vw, 88px)">
@@ -1130,6 +1156,7 @@ const jumpTo = (el) => {
     requestAnimationFrame(() => { go(); setTimeout(go, 120); setTimeout(go, 450); });
   }
 };
+const SAMPLE_CHAPTER = {"title": "Productos y Subproductos", "blocks": [{"isHead": true, "isPara": false, "isNote": false, "text": "‘EL PRODUCTO’ DEFINIDO"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Un producto es un servicio o artículo terminado y de alta calidad en las manos del consumidor como intercambio por algo valioso."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ejemplo: Daniel es un carpintero. Él construye gabinetes de baño y cocina. Teresa contrató a Daniel para reemplazar sus gabinetes de cocina con gabinetes de madera sólida (artículo) por cierta cantidad de dinero acordada (algo valioso). Él construyó unos bellos gabinetes de madera de cerezo (alta calidad), finamente lijados y sellados con tres capas de barniz y decorados con elegantes accesorios de acero inoxidable (terminado). La instalación que hizo Daniel de los gabinetes (en las manos del consumidor) fue impecable. A Teresa le encantó su mano de obra y con gusto le pagó por su trabajo (intercambio)."}, {"isHead": false, "isPara": true, "isNote": false, "text": "A menos que sea intercambiable no es un producto del todo. El producto es intercambio, el intercambio es producto."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ejemplo: Orlando es un artista y pinta al óleo. Sus obras se han vendido bien en la galería de Blanca. Recientemente, Orlando decidió pintar una serie de paisajes, lo cual es un alejamiento del arte moderno por el cual él es bien reconocido. Blanca exhibió sus paisajes en la galería por un mes pero no se vendió ni una sola pieza. Finalmente retiró las obras y se las regresó a Orlando para hacer espacio a obras que se vendieran. Aunque las obras de arte de Orlando son artículos terminados y de alta calidad no son PRODUCTOS porque no están “en las manos del consumidor como intercambio por algo valioso”."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Aún el individuo tiene que poner su servicio o artículo en las manos de algún otro empleado antes que pueda ser llamado producto."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ejemplo: Lucía trabaja en la oficina de un quiropráctico. Su trabajo consiste en mantener el libro de citas lleno, verificar la cobertura de los seguros antes de las citas y asegurarse de que los pacientes lleguen a tiempo. La semana pasada, Lucía llenó por completo el libro de citas, verificó toda la información de los seguros y logró que el 95% de los pacientes llegaran a tiempo para sus citas. El gerente de la oficina estaba asombrado con su producción. Lucía satisfizo la definición de producto, en el sentido de que sus servicios fueron terminados, de alta calidad y en las manos de sus compañeros de trabajo. Lucía proporcionó un intercambio por algo valioso (su pago) el cual recibió."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Por otro lado, supongamos que Lucía no logró obtener la información requerida sobre los seguros de ninguno de los pacientes. No le entregó a la encargada de facturación la información vital que necesitaba para una facturación rápida y correcta. En este caso, Lucía no podría llamar a este aspecto de su trabajo (verificación de cobertura de seguro) un producto, ya que no lo puso en las manos de algún otro empleado, en este caso la encargada de facturación."}, {"isHead": true, "isPara": false, "isNote": false, "text": "NOMBRA, DESEA Y OBTÉN TU PRODUCTO"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Los productos nunca se producen por sí solos. Tienes que nombrarlos (es decir, especifica lo que tus productos son), desearlos y obtenerlos."}, {"isHead": true, "isPara": false, "isNote": false, "text": "NOMBRA"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Desglosando esto en sus partes, encontramos que el fallo más común de cualquier empleado, radica en el primer ítem: ¡NOMBRA TU PRODUCTO!"}, {"isHead": false, "isPara": true, "isNote": false, "text": "En los organigramas se tienen enumerados los productos. Cada empleado tiene uno o más productos. Cuando veas a los empleados dando vueltas, chocando contra las paredes y entre sí, y sin producir nada, lo más probable es que pocos de ellos pueden NOMBRAR qué productos están tratando de producir."}, {"isHead": false, "isPara": true, "isNote": false, "text": "SI LA PRODUCCIÓN NO ESTÁ TENIENDO LUGAR, ES PROBABLE QUE FALTE LA APTITUD DE NOMBRAR EL PRODUCTO."}, {"isHead": true, "isPara": false, "isNote": false, "text": "DESEA"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Uno tiene que DESEAR de hecho el producto que está pidiendo o tratando de producir. No es necesario tener un aturdimiento místico vehemente acerca de desear el producto. Pero uno tampoco debería estar poniendo montañas en el camino de alguien que esté tratando de llevar algunos maderos al solar¹ de construcción del edificio."}, {"isHead": false, "isPara": false, "isNote": true, "text": "¹ solar: porción de terreno donde se ha edificado o que se destina a edificar en él."}, {"isHead": true, "isPara": false, "isNote": false, "text": "OBTÉN"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Para OBTENER, tienes que saber cómo organizar. Para llegar a alguna parte a la hora de OBTENER un producto, uno tiene que pasar cierto tiempo organizando de muchas maneras diferentes: la propia organización, el entrenamiento en el hat, la destreza técnica que los empleados deberían tener. Un director tendría un aspecto bastante ridículo tratando de ordenar que se construyera una pared de ladrillo, si no tuviera ladrillos ni albañil, ni proporcionara ninguno de los recursos para obtener cualquiera de los dos."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Claro, que si sólo organizas y nunca produces, tampoco vas a obtener un producto. Pero si sólo produces y nunca organizas, la única pared de ladrillos que verás es aquella con la que chocarás."}, {"isHead": true, "isPara": false, "isNote": false, "text": "PRODUCTOS FINALES VALIOSOS"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Por definición, un producto final valioso es algo que puede intercambiarse con otras entidades (por ejemplo, una división, una compañía, una comunidad, etc.) a cambio de apoyo. El apoyo equivale generalmente a comida, ropa, alojamiento, dinero, tolerancia y cooperación (buena voluntad)."}, {"isHead": false, "isPara": true, "isNote": false, "text": "A nivel individual esto es fácil de captar. El individuo produce uno o varios productos, los cuales, al fluir hacia dentro del departamento, la división, la organización, la compañía, la comunidad, el estado, la nación o el planeta, le reditúan su remuneración y buen nombre, o al menos suficiente buen nombre para impedir su abandono o destrucción. La supervivencia a largo plazo del individuo se logra de esta manera."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Un producto final valioso (PFV) es valioso porque es potencialmente, o de hecho, intercambiable. La palabra clave en este sentido es INTERCAMBIABLE. E intercambiabilidad se refiere al exterior, con algo que está fuera de la persona o entidad (una unidad organizacional, por ejemplo, una sección o departamento). A un producto final valioso se le podría denominar con facilidad PRODUCTO INTERCAMBIABLE VALIOSO."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Las partes de las organizaciones, las organizaciones, ciudades, estados y naciones siguen, todas ellas, los principios que se aplican al individuo. La supervivencia o el valor de cualquier sección, departamento, división u organización radica en si sigue o no estos principios de intercambio. Por lo tanto, es vital que una persona o una sección, un departamento, una división, una parte de una organización o una organización determine con exactitud qué está intercambiando. Está produciendo algo que es valioso para la actividad o actividades con las que está en comunicación, y está obteniendo apoyo por eso. Si realmente está produciendo productos finales valiosos, entonces tiene derecho al apoyo."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Los fundamentos de los productos finales valiosos son verdaderos para cualquier sistema industrial, político o económico. Muchos sistemas intentan eludir estos fundamentos, y en tales casos, el resultado final sería el desastre. El individuo, la sección, el departamento, la división, la organización o el país que no esté produciendo nada que sea lo suficientemente valioso como para intercambiarlo no será apoyado durante mucho tiempo. Es así de sencillo."}, {"isHead": true, "isPara": false, "isNote": false, "text": "COMPILAR UNA LISTA DE SUBPRODUCTOS"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Si una persona o cualquier parte de su compañía solo está organizando o esperando o “haciendo relaciones públicas”² y no está produciendo una mercancía o mercancías intercambiables en VOLUMEN o de CALIDAD, por las que se pueda obtener e incluso exigir apoyo, esa persona o parte de la compañía no será VIABLE (es decir, capaz de éxito o eficacia continua). No importa cuántas órdenes se emitan o lo bien que se tracen los organigramas o lo bonitos que sean los planes que se hagan para producir. El hecho concreto de la producción sigue siendo el factor dominante."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Lo bien que estén organizadas las cosas aumenta el volumen de la producción y mejora la calidad, y así puede producir viabilidad.³ Pero es el producto final valioso que está ahí y que se está intercambiando lo que determina la supervivencia básica. Siempre se puede encontrar el origen de la falta de viabilidad en el volumen y la calidad de un verdadero producto final valioso."}, {"isHead": false, "isPara": true, "isNote": false, "text": "La esperanza de un producto tiene un valor a corto-plazo que permite que una entidad se desarrolle. Pero cuando la esperanza no se materializa en un producto, entonces cualquier esperanza de viabilidad también se desploma. Uno, por lo tanto, debe organizar hacia atrás a partir del producto realmente producido."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Si tomas cualquier PFV y retrocedes por él paso por paso, usando un análisis de SER– HACER–TENER de lo que se requirió para crearlo y luego escribes una lista de acciones preliminares (es decir, las acciones en secuencia que tienen como resultado el PFV), tendrías una lista de subproductos."}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ejemplo: Alejandro es un coordinador de seminarios. Él es el encargado de montar los seminarios para su compañía en salas de conferencias en hoteles por todo el país. Los seminarios deben ser programados con tres meses de anticipación y dar como resultado una asistencia máxima con todo el personal y materiales requeridos presentes. Su PFV es “Seminarios bien planeados y entregados con éxito”."}, {"isHead": false, "isPara": true, "isNote": false, "text": "La lista mínima de los subproductos se dividiría en lo que tendrías que SER, lo que tendrías que HACER y lo que tendrías que TENER para lograr un seminario bien planeado y entregado exitosamente:"}, {"isHead": false, "isPara": false, "isNote": true, "text": "² hacer Relaciones Públicas: Relaciones Públicas es buenas obras a las que se ha dado buena publicidad. (Se usa PR como abreviatura de R elaciones P úblicas). Se compone de aquellas funciones de una corporación, organización, etc., relacionadas con el intento de crear una opinión pública favorable para sí. Las Relaciones Públicas se pueden corromper dando lugar a “una técnica de mentir de manera convincente”. Usado como una expresión de jerga, “hacer Relaciones Públicas” significa presentar una gran cantidad de informes falsos que sirven como cortina de humo para ocultar la ociosidad o las malas acciones. [Ejemplo: Juan estaba teniendo un montón de problemas para alcanzar su cuota de ventas. Estaba meramente “haciendo relaciones públicas” con su jefe cuando dijo que esperaba tener su mejor mes en la historia]."}, {"isHead": false, "isPara": false, "isNote": true, "text": "³ viabilidad: la longevidad, utilidad y lo deseable del producto. La viabilidad depende, principalmente, del intercambio en lo que concierne a la economía."}, {"isHead": true, "isPara": false, "isNote": false, "text": "LISTA DE SUBPRODUCTOS DEL COORDINADOR DE SEMINARIOS"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ser:"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Alguien que quiera coordinar seminarios"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Alguien entrenado en el hat para coordinar seminarios"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Alguien que es capaz de improvisar y adaptarse al momento"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Hacer:"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Seleccionar la ciudad y reservar el hotel para el seminario"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Obtener la lista de los empleados que van a asistir"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Programar los vuelos"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Organizar el transporte terrestre"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Obtener los fondos presupuestados"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Confirmar a todos los asistentes"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Enviar los paquetes de bienvenida"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Enviar los paquetes del seminario y los folletos al hotel"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Arribar al hotel con un día de anticipación"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Asegurarse de que todos los materiales están presentes"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Preparar la sala de conferencias"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Probar el equipo audiovisual"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Dar la bienvenida a los clientes"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Ayudar a los oradores cuando sea necesario"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Tener:"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Dinero para gastos del seminario"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Tiempo para programar el seminario con suficiente anticipación"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Directorio general del hotel"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Teléfono"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Lista de contacto de clientes"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Acceso a Internet/e-mail"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Horarios de vuelos"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Materiales para empaque"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Paquetes y folletos del seminario"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Sala de conferencias"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Equipo audiovisual"}, {"isHead": false, "isPara": false, "isNote": true, "text": "Teléfono celular"}, {"isHead": false, "isPara": true, "isNote": false, "text": "Si en alguna fecha futura, Alejandro descubriera que había algo mal en su producto final valioso, lo único que tendría que hacer sería evaluar esta lista y encontrar la razón de que no hubiera un PFV. Los subproductos que él omitió y los objetivos equivocados que persiguió saltarían a la vista y, si se manejan, podría tener como resultado su PFV bastante rápido."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Una lista válida de subproductos aumentará enormemente la eficiencia de la organización y mostrará los agujeros. Como son los PFVs, no las promesas ni la esperanza, los que mantienen a una organización en marcha, puedes ver que una lista de subproductos es vital para enderezar un área."}, {"isHead": false, "isPara": true, "isNote": false, "text": "Al evaluar las listas de los subproductos en contraposición a una inspección directa del área a la que se aplican, uno puede ver las cosas más importantes que faltan. Son estas cosas que faltan las que impiden el logro del producto final valioso del área, tan vital para la supervivencia de la organización."}, {"isHead": false, "isPara": true, "isNote": false, "text": "La prueba de cualquier lista de subproductos es: ¿Tiene como resultado productos finales valiosos? Si no es así, alguien ha estado ocupado en hacer que el personal esté ocupado (es decir, con trabajo no productivo: el trabajo que consume tiempo pero no arroja resultados productivos). La prueba de una lista de subproductos correcta es: Cuando se usa, ¿da como resultado buenos PFVs?"}]};
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -1154,21 +1181,27 @@ class Component extends DCLogic {
       part: 'organizacion',
       sent: false,
       agreed: false,
-      consentError: false
+      consentError: false,
+      sample: false,
+      blog: false
     };
   }
 
   componentDidUpdate() {
-    const prev = this._prev || { stage: 0, reading: null, pos: 0 };
-    this._prev = { stage: this.state.stage, reading: this.state.reading, pos: this.state.pos };
-    if (prev.reading !== this.state.reading) {
-      if (this.state.reading) {
-        const top = document.getElementById('lectura');
-        if (top) { jumpTo(top); }
+    const prev = this._prev || { stage: 0, reading: null, pos: 0, sample: false, blog: false };
+    this._prev = { stage: this.state.stage, reading: this.state.reading, pos: this.state.pos, sample: this.state.sample, blog: this.state.blog };
+    if (prev.reading !== this.state.reading || prev.sample !== this.state.sample || prev.blog !== this.state.blog) {
+      const toTop = () => { if (typeof window !== 'undefined') { window.scrollTo(0, 0); } };
+      if ((this.state.reading && prev.reading !== this.state.reading) || (this.state.sample && !prev.sample) || (this.state.blog && !this.state.reading)) {
+        toTop(); if (typeof requestAnimationFrame === 'function') { requestAnimationFrame(() => { toTop(); setTimeout(toTop, 120); }); }
+        if (this.state.goTo) { this.setState({ goTo: null }); }
       } else if (this.state.goTo) {
         const dest = document.getElementById(this.state.goTo);
         if (dest) { jumpTo(dest); }
         this.setState({ goTo: null });
+      } else if (prev.blog && !this.state.blog) {
+        const y = this._blogY || 0; const back = () => { if (typeof window !== 'undefined') { window.scrollTo(0, y); } };
+        back(); if (typeof requestAnimationFrame === 'function') { requestAnimationFrame(() => { back(); setTimeout(back, 120); setTimeout(back, 450); }); }
       }
       return;
     }
@@ -1186,6 +1219,7 @@ class Component extends DCLogic {
   }
 
   navTo(id, minStage) {
+    if (this.state.blog || this.state.sample || this.state.reading) { this.setState({ blog: false, sample: false, reading: null, goTo: id, stage: Math.max(this.state.stage, minStage) }); return; }
     if (this.state.stage < minStage) { this.setState({ stage: minStage, navId: id }); }
     else { jumpTo(document.getElementById(id)); }
   }
@@ -1751,7 +1785,7 @@ class Component extends DCLogic {
     } : { blocks: [] };
     tipView.readLabel = 'Entrar a leer el texto completo (' + minutesOf(tipSel.id) + ' min)';
     tipView.read = () => this.setState({ reading: tipSel.id });
-    const leaveReading = (target, stageMin) => () => this.setState({ reading: null, goTo: target, stage: Math.max(this.state.stage, stageMin) });
+    const leaveReading = (target, stageMin) => () => this.setState({ reading: null, blog: false, goTo: target, stage: Math.max(this.state.stage, stageMin) });
 
     const parts = [
       { id: 'entender', name: 'Aumentar la Comprensión y Descubrir el Poder Propio', title: 'Aumentar la Comprensión y Descubrir el Poder Propio', body: 'Capítulos 1 y 2', items: [{ text: 'Capítulo 1: El Triángulo de A-R-C · página 1' }, { text: 'Capítulo 2: El Triángulo de K-R-C · página 11' }] },
@@ -1810,11 +1844,18 @@ class Component extends DCLogic {
       show7: this.state.stage >= 7,
       advance: () => this.setState({ stage: Math.min(7, this.state.stage + 1) }),
       navSim: () => this.navTo('recorrido', 3),
-      navTips: () => this.navTo('tips', 4),
+      navTips: () => { if (!this.state.blog && !this.state.sample && !this.state.reading && typeof window !== 'undefined') { this._blogY = window.scrollY; } this.setState({ blog: true, reading: null, sample: false }); },
+      closeBlog: () => this.setState({ blog: false }),
+      openSample: () => this.setState({ sample: true }),
+      closeSample: () => this.setState({ sample: false, goTo: 'comprar', stage: Math.max(this.state.stage, 6) }),
+      isBlog: this.state.blog && !this.state.reading,
+      isSample: this.state.sample,
+      sample: SAMPLE_CHAPTER,
       navTeams: () => this.navTo('comprar', 6),
       navEnroll: () => this.navTo('comprar', 6),
       showUnverified: false,
       toCourse: () => {
+        if (this.state.blog) { this.setState({ blog: false, goTo: 'funciona', stage: Math.max(this.state.stage, 4) }); return; }
         if (this.state.stage < 4) {
           this.setState({ stage: 4 });
         } else {
@@ -1849,10 +1890,10 @@ class Component extends DCLogic {
       quote,
       reading: readingView,
       isReading: !!readingEntry,
-      notReading: !readingEntry,
+      notReading: !readingEntry && !this.state.blog && !this.state.sample,
       readToCourse: leaveReading('funciona', 4),
       readEnroll: leaveReading('comprar', 6),
-      readBack: leaveReading('tips', 4),
+      readBack: () => this.setState({ reading: null, blog: true }),
       tip: tipView,
       tipCats,
       hasChart: !!chartData,
