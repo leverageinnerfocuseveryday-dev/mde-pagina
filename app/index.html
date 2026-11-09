@@ -1330,7 +1330,7 @@ D.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.close
   if(navigator.share){navigator.share({text:txt,url:url}).catch(function(){})}else fb()}});
 D.addEventListener('keydown',function(ev){if(ev.key=='Escape'&&D.getElementById('p1cer'))cerNext()});
 /* ---------- Terminal MDE (Más / More), inspired by Changi Jewel */
-var APPVER='4.2';
+var APPVER='4.3';
 if(typeof CFG!='undefined'&&CFG.TERMINAL_IMG===undefined)CFG.TERMINAL_IMG='';
 function verLabel(){return S.lang=='en'?'Version '+APPVER+' · online':'Versión '+APPVER+' · en línea'}
 var TM={es:{welc:'Bienvenido a la Terminal MDE',next:'Próximo vuelo',item:'Ítem',hours:'Horas de vuelo',onTime:'A tiempo',done:'Curso completo',term:'Terminal',
@@ -1425,6 +1425,152 @@ function doUpdate(){if(navigator.onLine===false){var m=D.getElementById('updmsg'
 D.addEventListener('click',function(ev){if(ev.target.closest&&ev.target.closest('#updgo'))doUpdate()});
 D.addEventListener('visibilitychange',function(){if(D.visibilityState==='visible')checkUpdate()});
 setTimeout(checkUpdate,1500);setInterval(checkUpdate,600000);
+/* ---------- Pasaporte de Piloto MDE (gate C2) — 4.3 */
+var PP={es:{title:'Pasaporte de Piloto',sub:'Toca la portada para abrirlo',open:'Abrir pasaporte',close:'Cerrar pasaporte',course:'CURSO MDE',pass:'PASAPORTE DE PILOTO',pass2:'PILOT PASSPORT',
+ type:'Tipo / Type',code:'Código / Code',no:'Pasaporte Nº / Passport No.',name:'Nombre / Name',job:'Puesto / Position',rank:'Rango / Rank',hrs:'Horas de vuelo / Flight hours',
+ issue:'Fecha de emisión / Date of issue',auth:'Autoridad / Authority',authV:'TERMINAL MDE',valid:'Válido / Valid',validV:'MIENTRAS VUELES',sign:'Firma del titular / Holder’s signature',
+ noRank:'Pasajero',stamps:'Sellos de vuelo',stampsT:'Cada insignia que ganas queda sellada en tu pasaporte.',noSt:'Tu primer sello llegará cuando completes tu primer ítem.',nextSt:'Próximo sello',
+ add:'Agregar mi foto',chg:'Cambiar foto',del:'Quitar foto',saveImg:'Guardar imagen',saving:'Preparando…',saved:'Imagen lista',err:'No se pudo preparar la imagen.',
+ priv:'Tu foto se guarda en tu cuenta del curso. Solo tú la ves.',wv:'Si la app no te deja elegir la foto, abre el curso en el navegador de tu teléfono, inicia sesión y agrégala desde ahí. Aparecerá también aquí.',openWeb:'Abrir en el navegador',
+ badImg:'Esa imagen no se pudo leer. Prueba con otra foto.',pp:'Pasaporte'},
+ en:{title:'Pilot Passport',sub:'Tap the cover to open it',open:'Open passport',close:'Close passport',course:'MDE COURSE',pass:'PILOT PASSPORT',pass2:'PASAPORTE DE PILOTO',
+ type:'Type / Tipo',code:'Code / Código',no:'Passport No. / Pasaporte Nº',name:'Name / Nombre',job:'Position / Puesto',rank:'Rank / Rango',hrs:'Flight hours / Horas de vuelo',
+ issue:'Date of issue / Fecha de emisión',auth:'Authority / Autoridad',authV:'MDE TERMINAL',valid:'Valid / Válido',validV:'WHILE YOU FLY',sign:'Holder’s signature / Firma del titular',
+ noRank:'Passenger',stamps:'Flight stamps',stampsT:'Every badge you earn is stamped in your passport.',noSt:'Your first stamp arrives when you complete your first item.',nextSt:'Next stamp',
+ add:'Add my photo',chg:'Change photo',del:'Remove photo',saveImg:'Save image',saving:'Preparing…',saved:'Image ready',err:'Could not prepare the image.',
+ priv:'Your photo is saved in your course account. Only you can see it.',wv:'If the app does not let you choose a photo, open the course in your phone’s browser, sign in and add it there. It will also appear here.',openWeb:'Open in browser',
+ badImg:'That image could not be read. Try another photo.',pp:'Passport'}};
+function pp(k){return PP[S.lang=='en'?'en':'es'][k]}
+TM.es.s.C2='Tu pasaporte, cuenta e idioma';TM.en.s.C2='Your passport, account and language';
+function ppIsWv(){return/; wv\)/.test(navigator.userAgent||'')}
+function ppHash(s){var h=2166136261;s=String(s||'');for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0)}
+function ppNo(){var src=(typeof AU!='undefined'&&AU&&AU.email)||((S.name||'')+(S.act&&S.act.at||''));return'MDE'+('0000000'+(ppHash(src)%10000000)).slice(-7)}
+function ppRank(){var bs=badgeList().filter(function(b){return b.on});return bs.length?bs[bs.length-1]:null}
+function ppDate(iso){if(!iso)iso=todayIso();var p=String(iso).slice(0,10).split('-'),m=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],me=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+ return p[2]+' '+m[+p[1]-1]+(m[+p[1]-1]!=me[+p[1]-1]?'/'+me[+p[1]-1]:'')+' '+p[0]}
+function ppX(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function ppFold(s){return String(s||'').normalize?String(s).normalize('NFD').replace(/[̀-ͯ]/g,''):String(s||'')}
+function ppMrz(){var n=ppFold(S.name||'').toUpperCase().replace(/[^A-Z ]/g,'').trim().split(/\s+/),sur=n.length>1?n.slice(Math.ceil(n.length/2)).join('<'):n[0]||'',giv=n.length>1?n.slice(0,Math.ceil(n.length/2)).join('<'):'';
+ var l1=('P<MDE'+sur+'<<'+giv+'<'.repeat(44)).slice(0,44),hr=('000'+flightHours()).slice(-3),d=String((S.act&&S.act.at)||todayIso()).replace(/-/g,'').slice(2);
+ var l2=(ppNo()+'<MDE'+d+'<H'+hr+'<'.repeat(44)).slice(0,43)+(ppHash(ppNo()+d)%10);return[l1,l2]}
+/* gold MDE emblem (brackets + keyhole) */
+function ppLogo(x,y,s,fill){var f=function(a,b){return(x+a*s).toFixed(1)+','+(y+b*s).toFixed(1)};
+ return'<g fill="none" stroke="'+fill+'" stroke-width="'+(9*s).toFixed(1)+'" stroke-linecap="round" stroke-linejoin="round"><path d="M'+f(34,12)+' L'+f(14,12)+' L'+f(14,88)+' L'+f(34,88)+'"/><path d="M'+f(66,12)+' L'+f(86,12)+' L'+f(86,88)+' L'+f(66,88)+'"/></g>'+
+ '<circle cx="'+(x+50*s).toFixed(1)+'" cy="'+(y+38*s).toFixed(1)+'" r="'+(12*s).toFixed(1)+'" fill="'+fill+'"/><path d="M'+f(45,44)+' L'+f(39,74)+' L'+f(61,74)+' L'+f(55,44)+'Z" fill="'+fill+'"/>'}
+/* guilloche rosette (hypotrochoid) */
+function ppRose(cx,cy,R,r,d,n,col,op,w){var p='',st=Math.PI*2*n/900;for(var i=0;i<=900;i++){var t=i*st,x=(R-r)*Math.cos(t)+d*Math.cos((R-r)/r*t),y=(R-r)*Math.sin(t)-d*Math.sin((R-r)/r*t);p+=(i?'L':'M')+(cx+x).toFixed(1)+' '+(cy+y).toFixed(1)}
+ return'<path d="'+p+'" fill="none" stroke="'+col+'" stroke-opacity="'+op+'" stroke-width="'+(w||0.7)+'"/>'}
+function ppWaves(y0,y1,col,op){var o='';for(var y=y0;y<=y1;y+=9){var p='M-10 '+y;for(var x=0;x<=640;x+=20)p+=' Q'+(x+5)+' '+(y+(x/20%2?6:-6))+' '+(x+10)+' '+y+' T'+(x+20)+' '+y;o+='<path d="'+p+'" fill="none" stroke="'+col+'" stroke-opacity="'+op+'" stroke-width=".6"/>'}return o}
+function ppCover(){var W_=620,H_=880;return'<svg class="ppsvg" viewBox="0 0 '+W_+' '+H_+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+ppX(pp('pass'))+'"><defs>'+
+ '<linearGradient id="ppcv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14304F"/><stop offset=".55" stop-color="#0D2036"/><stop offset="1" stop-color="#081524"/></linearGradient>'+
+ '<linearGradient id="ppgd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1C2"/><stop offset=".35" stop-color="#E8B547"/><stop offset=".6" stop-color="#FFE29A"/><stop offset="1" stop-color="#B07A12"/></linearGradient>'+
+ '<radialGradient id="ppvg" cx=".5" cy=".45" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient></defs>'+
+ '<rect width="'+W_+'" height="'+H_+'" rx="26" fill="url(#ppcv)"/>'+
+ ppRose(310,430,230,73,120,73,'#58E1FF',.07,.8)+ppRose(310,430,170,41,95,41,'#FFE29A',.06,.7)+
+ '<rect x="22" y="22" width="576" height="836" rx="16" fill="none" stroke="url(#ppgd)" stroke-opacity=".55" stroke-width="1.4"/><rect x="30" y="30" width="560" height="820" rx="12" fill="none" stroke="url(#ppgd)" stroke-opacity=".25" stroke-width=".8"/>'+
+ '<text x="310" y="132" text-anchor="middle" fill="url(#ppgd)" font-family="Georgia,\'Times New Roman\',serif" font-size="30" letter-spacing="9">'+ppX(pp('course'))+'</text>'+
+ '<line x1="210" y1="160" x2="410" y2="160" stroke="url(#ppgd)" stroke-opacity=".7"/>'+
+ ppLogo(205,300,2.1,'url(#ppgd)')+
+ '<text x="310" y="640" text-anchor="middle" fill="url(#ppgd)" font-family="Georgia,\'Times New Roman\',serif" font-size="40" letter-spacing="6">'+ppX(pp('pass'))+'</text>'+
+ '<text x="310" y="690" text-anchor="middle" fill="url(#ppgd)" fill-opacity=".8" font-family="Georgia,\'Times New Roman\',serif" font-size="22" letter-spacing="8">'+ppX(pp('pass2'))+'</text>'+
+ '<g transform="translate(250,745)" fill="url(#ppgd)" opacity=".9">'+[0,1,2,3].map(function(f){var y=6+f*4,L=46-f*9;return'<path d="M58,'+y+' Q'+(58-L*.55)+','+(y-6)+' '+(58-L)+','+(y-2)+' Q'+(58-L*.5)+','+(y+4)+' 58,'+(y+4)+'Z"/><path d="M62,'+y+' Q'+(62+L*.55)+','+(y-6)+' '+(62+L)+','+(y-2)+' Q'+(62+L*.5)+','+(y+4)+' 62,'+(y+4)+'Z"/>'}).join('')+'<circle cx="60" cy="12" r="7"/></g>'+
+ '<rect width="'+W_+'" height="'+H_+'" rx="26" fill="url(#ppvg)"/></svg>'}
+function ppData(photo,forExport){var W_=620,H_=880,rb=ppRank(),mz=ppMrz(),nm=(S.name||'').toUpperCase(),jb=(S.job||'—').toUpperCase(),iss=ppDate((S.act&&S.act.at)||todayIso());
+ var lab=function(x,y,k){return'<text x="'+x+'" y="'+y+'" font-family="Arial,Helvetica,sans-serif" font-size="12.5" fill="#4F6B80" letter-spacing=".6">'+ppX(pp(k))+'</text>'},
+ val=function(x,y,v,sz,w){return'<text x="'+x+'" y="'+y+'" font-family="Arial,Helvetica,sans-serif" font-size="'+(sz||22)+'" font-weight="'+(w||700)+'" fill="#10233A"'+(String(v).length>22?' textLength="'+Math.min(330,String(v).length*11.5)+'" lengthAdjust="spacingAndGlyphs"':'')+'>'+ppX(v)+'</text>'};
+ var ph=photo?'<image href="'+photo+'" x="40" y="128" width="210" height="280" preserveAspectRatio="xMidYMid slice" clip-path="url(#ppclip)"/>':
+  '<rect x="40" y="128" width="210" height="280" rx="12" fill="#DCE7EC"/><circle cx="145" cy="232" r="52" fill="#B8CAD4"/><path d="M60 408 C64 330 105 300 145 300 C185 300 226 330 230 408Z" fill="#B8CAD4"/>';
+ var gh=photo?'<image href="'+photo+'" x="470" y="560" width="96" height="128" preserveAspectRatio="xMidYMid slice" opacity=".32" filter="url(#ppgray)" clip-path="url(#ppclip2)"/>':'';
+ return'<svg class="ppsvg" viewBox="0 0 '+W_+' '+H_+'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="'+ppX(pp('title')+' · '+(S.name||''))+'"><defs>'+
+ '<linearGradient id="pppa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBF7EE"/><stop offset=".5" stop-color="#F1F6F3"/><stop offset="1" stop-color="#E6F1F4"/></linearGradient>'+
+ '<linearGradient id="pphd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0D2036"/><stop offset="1" stop-color="#14456A"/></linearGradient>'+
+ '<linearGradient id="ppho" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#58E1FF" stop-opacity=".0"/><stop offset=".3" stop-color="#58E1FF" stop-opacity=".22"/><stop offset=".5" stop-color="#C9A0FF" stop-opacity=".2"/><stop offset=".7" stop-color="#FFE29A" stop-opacity=".25"/><stop offset="1" stop-color="#4ADE9A" stop-opacity="0"/></linearGradient>'+
+ '<linearGradient id="ppgd2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8B547"/><stop offset="1" stop-color="#B07A12"/></linearGradient>'+
+ '<clipPath id="ppclip"><rect x="40" y="128" width="210" height="280" rx="12"/></clipPath><clipPath id="ppclip2"><rect x="470" y="560" width="96" height="128" rx="8"/></clipPath>'+
+ '<filter id="ppgray"><feColorMatrix type="saturate" values="0"/></filter></defs>'+
+ '<rect width="'+W_+'" height="'+H_+'" rx="22" fill="url(#pppa)"/>'+
+ ppWaves(430,880,'#1E8FA8',.10)+
+ ppRose(470,330,160,47,88,47,'#1E8FA8',.13,.6)+ppRose(470,330,110,29,64,29,'#C98A12',.12,.5)+
+ /* line-art: Jewel dome + waterfall + contrail */
+ '<g fill="none" stroke="#1E8FA8" stroke-opacity=".16" stroke-width="1.2"><path d="M300 700 Q460 520 620 700"/><path d="M330 700 Q460 550 590 700"/><path d="M458 560 C455 610 448 660 444 700 M462 560 C465 610 472 660 476 700"/><path d="M-10 520 C150 470 300 470 640 380" stroke-dasharray="2 6"/></g>'+
+ '<path d="M0 22 Q0 0 22 0 L598 0 Q620 0 620 22 L620 92 L0 92Z" fill="url(#pphd)"/>'+
+ ppLogo(26,16,.6,'#FFE29A')+
+ '<text x="96" y="46" font-family="Georgia,\'Times New Roman\',serif" font-size="22" fill="#FFE29A" letter-spacing="4">'+ppX(pp('course'))+'</text>'+
+ '<text x="96" y="72" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#9FDFF0" letter-spacing="3">'+ppX(pp('pass')+' · '+pp('pass2'))+'</text>'+
+ ph+'<rect x="40" y="128" width="210" height="280" rx="12" fill="none" stroke="#10233A" stroke-opacity=".25"/>'+
+ /* holographic band with logos over photo corner */
+ '<g opacity=".9"><rect x="150" y="300" width="140" height="140" rx="70" fill="url(#ppho)"/>'+ppLogo(185,335,.7,'#FFFFFF').replace(/fill="#FFFFFF"/g,'fill="#FFFFFF" fill-opacity=".35"').replace(/stroke="#FFFFFF"/g,'stroke="#FFFFFF" stroke-opacity=".35"')+'</g>'+
+ lab(280,140,'type')+val(280,166,'P')+lab(390,140,'code')+val(390,166,'MDE')+
+ lab(280,204,'no')+val(280,232,ppNo(),24)+
+ lab(280,270,'rank')+val(280,298,(rb?rb.n.split(' · ')[0]:pp('noRank')).toUpperCase(),20)+
+ lab(280,336,'hrs')+val(280,364,flightHours()+' h',22)+
+ lab(40,448,'name')+val(40,480,nm,26)+
+ lab(40,518,'job')+val(40,546,jb,20,600)+
+ lab(40,584,'issue')+val(40,610,iss,18,600)+lab(250,584,'valid')+val(250,610,pp('validV'),18,600)+
+ lab(40,646,'auth')+val(40,672,pp('authV'),18,600)+
+ lab(40,706,'sign')+'<text x="48" y="748" font-family="\'Segoe Script\',\'Brush Script MT\',\'Snell Roundhand\',\'Apple Chancery\',cursive" font-size="32" fill="#14306A">'+ppX(S.name||'')+'</text><line x1="40" y1="756" x2="420" y2="756" stroke="#10233A" stroke-opacity=".3"/>'+
+ gh+'<g transform="translate(486,712)">'+ppLogo(0,0,.16,'#C98A12')+'</g>'+
+ '<rect x="0" y="776" width="620" height="104" fill="#FFFFFF" fill-opacity=".55"/><path d="M0 776 L620 776" stroke="#10233A" stroke-opacity=".12"/>'+
+ '<text x="30" y="818" font-family="\'OCR B\',\'OCR-B\',\'Courier New\',Consolas,monospace" font-size="21" fill="#10233A" textLength="560" lengthAdjust="spacing">'+ppX(mz[0])+'</text>'+
+ '<text x="30" y="852" font-family="\'OCR B\',\'OCR-B\',\'Courier New\',Consolas,monospace" font-size="21" fill="#10233A" textLength="560" lengthAdjust="spacing">'+ppX(mz[1])+'</text>'+
+ '<rect x="1" y="1" width="618" height="878" rx="21" fill="none" stroke="#10233A" stroke-opacity=".18" stroke-width="2"/></svg>'}
+var PPINK=['#0E7C86','#B23A48','#5B3FA0','#2E7D32','#B5651D','#1F5FA8','#8E2C6E','#3D6B21','#A33C10','#20507A','#B07A12'];
+function ppStamps(){var bs=badgeList(),on=bs.filter(function(b){return b.on}),nx=bs.filter(function(b){return!b.on})[0];
+ var cells=on.map(function(b,i){var c=PPINK[i%PPINK.length],rot=((ppHash(b.id)%17)-8),dt=ppDate((S.badgeAt&&S.badgeAt[b.id])||todayIso()),nm=b.n.split(' · ')[0].toUpperCase(),round=i%2==0;
+  var sv=round?'<svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="72" fill="none" stroke="'+c+'" stroke-width="4"/><circle cx="80" cy="80" r="62" fill="none" stroke="'+c+'" stroke-width="1.5"/>'+
+   '<defs><path id="pparc'+i+'" d="M24 80 A56 56 0 0 1 136 80"/></defs><text font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="'+c+'" letter-spacing="2"><textPath href="#pparc'+i+'" startOffset="50%" text-anchor="middle">TERMINAL MDE</textPath></text>'+
+   '<g transform="translate(62,62) scale(.36)">'+ppLogo(0,0,1,c)+'</g><text x="80" y="118" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="'+c+'">'+ppX(dt)+'</text></svg>':
+   '<svg viewBox="0 0 180 130" aria-hidden="true"><rect x="5" y="5" width="170" height="120" rx="14" fill="none" stroke="'+c+'" stroke-width="4"/><rect x="13" y="13" width="154" height="104" rx="9" fill="none" stroke="'+c+'" stroke-width="1.4" stroke-dasharray="5 3"/>'+
+   '<text x="90" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="'+c+'" letter-spacing="3">✈ MDE ✈</text><text x="90" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="'+c+'">'+ppX(S.lang=='en'?'DEPARTURE':'SALIDA')+'</text>'+
+   '<text x="90" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="'+c+'">'+ppX(dt)+'</text></svg>';
+  return'<div class="ppst" style="--rot:'+rot+'deg;--ink:'+c+'">'+sv+'<b style="color:'+c+'">'+ppX(nm)+'</b></div>'}).join('');
+ return'<div class="pppage"><p class="ppeh">'+ppX(pp('stamps'))+'</p><p class="ppmut">'+ppX(pp('stampsT'))+'</p>'+(on.length?'<div class="ppstg">'+cells+'</div>':'<p class="ppmut" style="margin-top:14px">'+ppX(pp('noSt'))+'</p>')+
+ (nx?'<p class="ppnext">'+ppX(pp('nextSt'))+': <b>'+ppX(nx.n.split(' · ')[0])+'</b> · '+ppX(nx.req||'')+'</p>':'')+'</div>'}
+function ppBlock(){var open=!!V.ppOpen,wv=ppIsWv(),has=!!S.photo;
+ return'<section class="ppwrap" aria-label="'+ppX(pp('title'))+'"><p class="eyebrow">'+ppX(pp('pp'))+'</p><h2 class="pph">'+ppX(pp('title'))+'</h2>'+
+ '<div class="ppbook'+(open?' open':'')+'"><div class="ppdata">'+ppData(S.photo)+'<span class="ppholo" aria-hidden="true"></span></div>'+
+ '<button type="button" class="ppcover" data-pp="toggle" aria-label="'+ppX(pp('open'))+'" aria-expanded="'+open+'">'+ppCover()+'<span class="ppshine" aria-hidden="true"></span></button></div>'+
+ (open?'':'<p class="ppmut" style="text-align:center">'+ppX(pp('sub'))+'</p>')+
+ (open?'<div class="ppacts"><label class="btn go ppfile">'+ppX(has?pp('chg'):pp('add'))+'<input type="file" accept="image/*" id="ppin"></label>'+(has?'<button type="button" class="btn sec" data-pp="del">'+ppX(pp('del'))+'</button>':'')+
+  (!wv&&W.HTMLCanvasElement?'<button type="button" class="btn sec" data-pp="img">'+ppX(pp('saveImg'))+'</button>':'')+'<button type="button" class="btn sec" data-pp="toggle">'+ppX(pp('close'))+'</button></div>'+
+  '<p class="ppmut" id="ppmsg" role="status">'+ppX(pp('priv'))+'</p>'+(wv?'<p class="ppmut">'+ppX(pp('wv'))+' <a href="'+ppX(typeof appUrl=='function'?appUrl():'https://leverageinnerfocuseveryday-dev.github.io/mde-pagina/app/')+'" target="_blank" rel="noopener">'+ppX(pp('openWeb'))+'</a></p>':'')+ppStamps():'')+'</section>'}
+var _masPP=mas;mas=function(){_masPP();if(V.gate!='C2')return;var m=D.querySelector('main');if(!m)return;var h=m.querySelector('.tgh'),d=D.createElement('div');d.innerHTML=ppBlock();var s=d.firstChild;if(h&&h.nextSibling)m.insertBefore(s,h.nextSibling);else m.appendChild(s)};
+function ppRedraw(){var o=D.querySelector('.ppwrap');if(!o)return;var d=D.createElement('div');d.innerHTML=ppBlock();o.parentNode.replaceChild(d.firstChild,o)}
+function ppMsg(t_){var m=D.getElementById('ppmsg');if(m)m.textContent=t_}
+function ppLoad(file){if(!file)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){var tw=360,th=480,c=D.createElement('canvas');c.width=tw;c.height=th;var x=c.getContext('2d'),r=Math.max(tw/im.width,th/im.height),w=im.width*r,h=im.height*r;
+  x.fillStyle='#DCE7EC';x.fillRect(0,0,tw,th);x.drawImage(im,(tw-w)/2,(th-h)/2.6,w,h);var u=c.toDataURL('image/jpeg',.84);if(u.length>200000)u=c.toDataURL('image/jpeg',.6);S.photo=u;save();ppRedraw()};
+  im.onerror=function(){ppMsg(pp('badImg'))};im.src=rd.result};rd.onerror=function(){ppMsg(pp('badImg'))};rd.readAsDataURL(file)}
+function ppExport(btn){btn.disabled=true;ppMsg(pp('saving'));var svg=ppData(S.photo,true);var url='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),im=new Image();
+ im.onload=function(){try{var k=2,c=D.createElement('canvas');c.width=620*k;c.height=880*k;var x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);
+  c.toBlob(function(b){btn.disabled=false;if(!b){ppMsg(pp('err'));return}var fn='Pasaporte_MDE_'+ppFold(S.name||'piloto').replace(/[^A-Za-z0-9]+/g,'_')+'.png',f=null;try{f=new File([b],fn,{type:'image/png'})}catch(y){}
+   if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:pp('title')}).catch(function(){});ppMsg(pp('saved'));return}
+   var a=D.createElement('a');a.href=URL.createObjectURL(b);a.download=fn;D.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);ppMsg(pp('saved'))},'image/png')}catch(y){btn.disabled=false;ppMsg(pp('err'))}};
+ im.onerror=function(){btn.disabled=false;ppMsg(pp('err'))};im.src=url}
+D.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-pp]');if(!b)return;var a=b.dataset.pp;
+ if(a=='toggle'){V.ppOpen=!V.ppOpen;var bk=D.querySelector('.ppbook');if(bk&&!tReduced()&&V.ppOpen){bk.classList.add('open');setTimeout(ppRedraw,620)}else ppRedraw();return}
+ if(a=='del'){delete S.photo;save();ppRedraw();return}
+ if(a=='img')ppExport(b)});
+D.addEventListener('change',function(ev){if(ev.target&&ev.target.id=='ppin'){ppLoad(ev.target.files&&ev.target.files[0]);ev.target.value=''}});
+(function(){var st=D.createElement('style');st.textContent=
+'.ppwrap{margin:4px 0 22px}.pph{margin:2px 0 12px}.ppmut{color:var(--mut,#AEBBD0);font-size:14px;margin:8px 0}'+
+'.ppbook{position:relative;max-width:420px;margin:0 auto;aspect-ratio:620/880;perspective:1600px}'+
+'.ppsvg{display:block;width:100%;height:auto}'+
+'.ppdata{position:absolute;inset:0;border-radius:3.6%;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45)}'+
+'.ppcover{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer;transform-origin:left center;transition:transform .6s cubic-bezier(.4,.1,.2,1),opacity .6s;border-radius:4.2%;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.5);z-index:2;backface-visibility:hidden}'+
+'.ppcover:focus-visible{outline:3px solid #58E1FF;outline-offset:4px}'+
+'.ppbook.open .ppcover{transform:rotateY(-165deg);opacity:0;pointer-events:none}'+
+'.ppshine,.ppholo{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,240,200,.28) 45%,rgba(255,255,255,.05) 55%,transparent 70%);background-size:250% 100%;animation:ppsh 6s ease-in-out infinite}'+
+'.ppholo{background:linear-gradient(115deg,transparent 25%,rgba(88,225,255,.18) 40%,rgba(201,160,255,.16) 50%,rgba(255,226,154,.18) 60%,transparent 75%);background-size:250% 100%;mix-blend-mode:multiply;animation-duration:8s}'+
+'@keyframes ppsh{0%{background-position:120% 0}100%{background-position:-120% 0}}'+
+'.ppacts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 4px}.ppacts .btn{flex:1 1 150px;margin:0}'+
+'.ppfile{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}.ppfile input{position:absolute;inset:0;opacity:0;cursor:pointer}'+
+'.pppage{margin-top:18px;background:linear-gradient(135deg,#FBF7EE,#E6F1F4);color:#10233A;border-radius:16px;padding:18px 16px;box-shadow:0 10px 28px rgba(0,0,0,.35)}'+
+'.ppeh{font:700 13px/1.2 Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#14456A;margin:0}.pppage .ppmut{color:#4F6B80}'+
+'.ppstg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:14px 10px;margin-top:12px}'+
+'.ppst{text-align:center;transform:rotate(var(--rot));opacity:.88;animation:ppin .5s cubic-bezier(.2,1.6,.4,1) both}.ppst svg{width:100%;max-width:130px;height:auto;filter:url(#none)}.ppst b{display:block;font:700 11px/1.25 Arial,sans-serif;letter-spacing:.5px;margin-top:2px}'+
+'@keyframes ppin{0%{transform:rotate(var(--rot)) scale(1.6);opacity:0}100%{transform:rotate(var(--rot)) scale(1);opacity:.88}}'+
+'.ppnext{margin:14px 0 0;font-size:14px;color:#10233A}'+
+'@media (prefers-reduced-motion:reduce){.ppshine,.ppholo,.ppst{animation:none!important}.ppcover{transition:none}}';D.head.appendChild(st)})();
 Object.assign(T.es,{cabina:'Cabina',ruta:'Ruta',libro:'Libro',cifras:'Cifras',mas:'Más',basic:'BÁSICO',prem:'PREMIUM',
 cabEye:'Cabina de mando',avance:'Avance del curso',items:'ítems',preflight:'Lista de pre-vuelo',ready:'TODAS LAS LUCES EN VERDE: LISTO PARA DESPEGAR',missing:'LUCES APAGADAS',lPuesto:'PUESTO',lMeta:'META',lCifras:'CIFRAS',cap:'Cap.',
 hPuesto:'Se enciende cuando defines lo que entrega tu puesto: en el ejercicio de pre-vuelo de Funciones o al completar un ítem de Mi puesto.',hMeta:'Se enciende cuando tienes una meta con número y fecha: en el ejercicio de pre-vuelo de Metas o al completar un ítem de Metas y planes.',hCifras:'Se enciende cuando tienes una estadística con al menos dos valores en Cifras.',
